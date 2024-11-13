@@ -1,0 +1,11 @@
+.env*
+.git*
+/vendor
+/node_modules
+/public/hot
+/storage/*.key
+/.fleet
+/.idea
+/.vscode
+_ide_helper_models.php
+_ide_helper.php

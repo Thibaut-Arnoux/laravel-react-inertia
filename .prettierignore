@@ -1,0 +1,9 @@
+/.fleet
+/.idea
+/.zed
+/.vscode
+node_modules
+composer.*
+*.yaml
+*.yml
+*.md

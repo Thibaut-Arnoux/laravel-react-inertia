@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "bmewburn.vscode-intelephense-client",
+        "open-southeners.laravel-pint",
+        "swordev.phpstan",
+        "xdebug.php-debug",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss",
+        "ms-azuretools.vscode-docker",
+        "vivaxy.vscode-conventional-commits",
+    ]
+}
