@@ -1,15 +1,21 @@
-import { Canvas } from '@/Components/Canvas';
+import { Canvas } from '@/Components/Canvas/Canvas';
+import { Shape } from '@/Components/Canvas/Shape';
 import { Hud } from '@/Components/Hud/Hud';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { CanvasProvider } from '@/hooks/useCanvas';
 import { Head } from '@inertiajs/react';
 
 const Paint = () => {
     return (
         <AuthenticatedLayout>
             <Head title="Paint" />
-            <div className="flex-grow">
+            <div className="overflow-hidden">
                 <Hud />
-                <Canvas />
+                <CanvasProvider>
+                    <Canvas>
+                        <Shape />
+                    </Canvas>
+                </CanvasProvider>
             </div>
         </AuthenticatedLayout>
     );
