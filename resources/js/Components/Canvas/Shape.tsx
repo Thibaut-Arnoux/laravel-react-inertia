@@ -1,15 +1,24 @@
+import { Drawable } from '@/classes/Drawable';
 import { Rectangle } from '@/classes/Rectangle';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useEffect, useRef } from 'react';
 
+export type ShapeMode = 'rectangle' | 'circle' | 'line' | 'triangle';
+
 export const Shape = () => {
-    const { canvasRef, redraw, drawStack, mouseLeftClick, mouseMove } =
-        useCanvas();
+    const {
+        canvasRef,
+        redraw,
+        drawStack,
+        shapeMode,
+        mouseLeftClick,
+        mouseMove,
+    } = useCanvas();
     const ctx = canvasRef.current?.getContext('2d');
-    const rectangle = useRef<Rectangle | null>(null);
+    const drawable = useRef<Drawable | null>(null);
 
     useEffect(() => {
-        if (!ctx || !mouseMove || !mouseLeftClick) return;
+        if (!ctx || !mouseMove || !mouseLeftClick || !shapeMode) return;
 
         redraw();
 
@@ -25,20 +34,27 @@ export const Shape = () => {
         const y = Math.min(startY, endY);
 
         // Draw rectangle
-        rectangle.current = new Rectangle(x, y, width, height);
-        rectangle.current.draw(ctx);
-    }, [ctx, redraw, mouseLeftClick, mouseMove]);
+        switch (shapeMode) {
+            case 'rectangle':
+                console.debug('rectangle');
+                drawable.current = new Rectangle(x, y, width, height);
+                drawable.current.draw(ctx);
+                break;
+            default:
+                break;
+        }
+    }, [ctx, redraw, mouseLeftClick, mouseMove, shapeMode]);
 
     useEffect(() => {
         if (
             mouseLeftClick ||
-            !rectangle.current ||
-            (!rectangle.current.width && !rectangle.current.height)
+            !drawable.current ||
+            (!drawable.current.width && !drawable.current.height)
         )
             return;
 
-        drawStack.current.push(rectangle.current);
-        rectangle.current = null;
+        drawStack.current.push(drawable.current);
+        drawable.current = null;
     }, [mouseLeftClick, drawStack]);
 
     return <></>;

@@ -1,4 +1,5 @@
-import { IDrawable } from '@/classes/IDrawable';
+import { Drawable } from '@/classes/Drawable';
+import { ShapeMode } from '@/Components/Canvas/Shape';
 import {
     Dispatch,
     MutableRefObject,
@@ -12,7 +13,7 @@ import {
 
 type CanvasContextProps = {
     canvasRef: MutableRefObject<HTMLCanvasElement | null>;
-    drawStack: MutableRefObject<IDrawable[]>;
+    drawStack: MutableRefObject<Drawable[]>;
     redraw: () => void;
     isDrawing: boolean;
     setIsDrawing: Dispatch<SetStateAction<boolean>>;
@@ -20,18 +21,21 @@ type CanvasContextProps = {
     setMouseLeftClick: Dispatch<SetStateAction<MouseEvent | null>>;
     mouseMove: MouseEvent | null;
     setMouseMove: Dispatch<SetStateAction<MouseEvent | null>>;
+    shapeMode: ShapeMode | null;
+    setShapeMode: Dispatch<SetStateAction<ShapeMode | null>>;
 };
 
 const CanvasContext = createContext<CanvasContextProps | null>(null);
 
 export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const drawStack = useRef<IDrawable[]>([]);
+    const drawStack = useRef<Drawable[]>([]);
     const [isDrawing, setIsDrawing] = useState<boolean>(false);
     const [mouseLeftClick, setMouseLeftClick] = useState<MouseEvent | null>(
         null,
     );
     const [mouseMove, setMouseMove] = useState<MouseEvent | null>(null);
+    const [shapeMode, setShapeMode] = useState<ShapeMode | null>(null);
 
     const redraw = () => {
         const ctx = canvasRef.current?.getContext('2d');
@@ -59,6 +63,8 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         setMouseLeftClick,
         mouseMove,
         setMouseMove,
+        shapeMode,
+        setShapeMode,
     };
 
     return (

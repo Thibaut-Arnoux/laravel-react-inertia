@@ -1,17 +1,6 @@
-import { IDrawable } from './IDrawable';
+import { Drawable } from './Drawable';
 
-export class Rectangle implements IDrawable {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-
-    constructor(x: number, y: number, width: number, height: number) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
+export class Rectangle extends Drawable {
     draw(ctx: CanvasRenderingContext2D) {
         ctx.beginPath();
         ctx.lineWidth = 2;
