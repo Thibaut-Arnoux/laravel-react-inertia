@@ -17,7 +17,7 @@ export const Canvas = ({ children }: PropsWithChildren) => {
             <canvas id="canvas" ref={canvasRef} className="bg-base-100">
                 Sorry your browser does not support canvas.
             </canvas>
-            {children}
+            {canvasRef.current && children}
         </>
     );
 };
