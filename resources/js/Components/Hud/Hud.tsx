@@ -8,9 +8,9 @@ import { TopRight } from './TopRight';
 
 export const Hud = () => {
     return (
-        <>
+        <div>
             <TopLeft>
-                <div className="m-4 flex flex-row gap-2 rounded bg-base-200 p-1 shadow">
+                <div className="flex flex-row gap-2 rounded bg-base-200 p-1 shadow">
                     <button
                         className="btn btn-square btn-outline btn-sm rounded-none border-none"
                         onClick={(e) => {
@@ -42,6 +42,6 @@ export const Hud = () => {
             <BottomRight>
                 <Coordinates />
             </BottomRight>
-        </>
+        </div>
     );
 };
