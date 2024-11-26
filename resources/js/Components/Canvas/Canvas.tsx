@@ -18,7 +18,7 @@ export const Canvas = ({ children }: PropsWithChildren) => {
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-    }, []);
+    }, [canvasRef]);
 
     return (
         <>

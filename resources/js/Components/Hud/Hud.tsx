@@ -1,10 +1,10 @@
+import { Coordinates } from '@/Components/Coordinates';
 import { BottomLeft } from './BottomLeft';
 import { BottomMiddle } from './BottomMiddle';
 import { BottomRight } from './BottomRight';
 import { TopLeft } from './TopLeft';
 import { TopMiddle } from './TopMiddle';
 import { TopRight } from './TopRight';
-import { Coordinates } from '@/Components/Coordinates';
 
 export const Hud = () => {
     return (

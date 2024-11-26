@@ -1,4 +1,4 @@
-import { IDrawable } from "./IDrawable";
+import { IDrawable } from './IDrawable';
 
 export class Rectangle implements IDrawable {
     x: number;

@@ -17,24 +17,29 @@ export const Shape = () => {
         const { offsetX: endX, offsetY: endY } = mouseMove;
 
         // Calculate width and height
-        let width = Math.abs(endX - startX);
-        let height = Math.abs(endY - startY);
+        const width = Math.abs(endX - startX);
+        const height = Math.abs(endY - startY);
 
         // Determine top-left corner coordinates
-        let x = Math.min(startX, endX);
-        let y = Math.min(startY, endY);
+        const x = Math.min(startX, endX);
+        const y = Math.min(startY, endY);
 
         // Draw rectangle
         rectangle.current = new Rectangle(x, y, width, height);
         rectangle.current.draw(ctx);
-    }, [mouseLeftClick, mouseMove]);
+    }, [ctx, redraw, mouseLeftClick, mouseMove]);
 
     useEffect(() => {
-        if (mouseLeftClick || !rectangle.current || (!rectangle.current.width && !rectangle.current.height)) return;
+        if (
+            mouseLeftClick ||
+            !rectangle.current ||
+            (!rectangle.current.width && !rectangle.current.height)
+        )
+            return;
 
         drawStack.current.push(rectangle.current);
         rectangle.current = null;
-    }, [mouseLeftClick]);
+    }, [mouseLeftClick, drawStack]);
 
     return <></>;
 };

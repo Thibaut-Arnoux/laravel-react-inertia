@@ -1,5 +1,5 @@
-import { useEventListener } from "usehooks-ts"
-import { useCanvas } from "@/hooks/useCanvas";
+import { useCanvas } from '@/hooks/useCanvas';
+import { useEventListener } from 'usehooks-ts';
 
 export const useMouseDown = () => {
     const { canvasRef, setIsDrawing, setMouseLeftClick } = useCanvas();
@@ -10,4 +10,4 @@ export const useMouseDown = () => {
     };
 
     useEventListener('mousedown', handleMouseDown, canvasRef);
-}
+};
