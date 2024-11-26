@@ -36,7 +36,6 @@ export const Shape = () => {
         // Draw rectangle
         switch (shapeMode) {
             case 'rectangle':
-                console.debug('rectangle');
                 drawable.current = new Rectangle(x, y, width, height);
                 drawable.current.draw(ctx);
                 break;
