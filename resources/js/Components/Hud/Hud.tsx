@@ -4,6 +4,7 @@ import { BottomRight } from './BottomRight';
 import { TopLeft } from './TopLeft';
 import { TopMiddle } from './TopMiddle';
 import { TopRight } from './TopRight';
+import { Coordinates } from '@/Components/Coordinates';
 
 export const Hud = () => {
     return (
@@ -38,7 +39,9 @@ export const Hud = () => {
 
             <BottomLeft></BottomLeft>
             <BottomMiddle></BottomMiddle>
-            <BottomRight></BottomRight>
+            <BottomRight>
+                <Coordinates />
+            </BottomRight>
         </>
     );
 };

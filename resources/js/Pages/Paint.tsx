@@ -10,8 +10,8 @@ const Paint = () => {
         <AuthenticatedLayout>
             <Head title="Paint" />
             <div className="overflow-hidden">
-                <Hud />
                 <CanvasProvider>
+                    <Hud />
                     <Canvas>
                         <Shape />
                     </Canvas>
