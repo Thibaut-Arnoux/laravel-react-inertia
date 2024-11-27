@@ -1,19 +1,11 @@
-import { useMouseDown } from '@/hooks/listeners/useMouseDown';
-import { useMouseMove } from '@/hooks/listeners/useMouseMove';
-import { useMouseUp } from '@/hooks/listeners/useMouseUp';
+import { useListeners } from '@/hooks/listeners/useListeners';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useRender } from '@/hooks/useRender';
 import { PropsWithChildren, useEffect } from 'react';
 
 export const Canvas = ({ children }: PropsWithChildren) => {
     const { canvasRef } = useCanvas();
-
-    // listeners
-    useMouseDown();
-    useMouseUp();
-    useMouseMove();
-
-    // render
+    useListeners();
     useRender();
 
     useEffect(() => {
