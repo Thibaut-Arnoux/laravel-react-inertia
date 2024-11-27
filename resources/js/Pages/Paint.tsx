@@ -1,5 +1,4 @@
-import { Canvas } from '@/Components/Canvas/Canvas';
-import { Shape } from '@/Components/Canvas/Shape';
+import { Canvas } from '@/Components/Canvas';
 import { Hud } from '@/Components/Hud/Hud';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { CanvasProvider } from '@/hooks/useCanvas';
@@ -12,9 +11,7 @@ const Paint = () => {
             <div className="overflow-hidden">
                 <CanvasProvider>
                     <Hud />
-                    <Canvas>
-                        <Shape />
-                    </Canvas>
+                    <Canvas></Canvas>
                 </CanvasProvider>
             </div>
         </AuthenticatedLayout>

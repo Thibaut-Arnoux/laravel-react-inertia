@@ -1,5 +1,5 @@
 import { Drawable } from '@/classes/Drawable';
-import { ShapeMode } from '@/Components/Canvas/Shape';
+import { ShapeMode } from '@/types/shape';
 import {
     Dispatch,
     MutableRefObject,

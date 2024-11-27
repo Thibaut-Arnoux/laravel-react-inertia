@@ -2,6 +2,7 @@ import { useMouseDown } from '@/hooks/listeners/useMouseDown';
 import { useMouseMove } from '@/hooks/listeners/useMouseMove';
 import { useMouseUp } from '@/hooks/listeners/useMouseUp';
 import { useCanvas } from '@/hooks/useCanvas';
+import { useRender } from '@/hooks/useRender';
 import { PropsWithChildren, useEffect } from 'react';
 
 export const Canvas = ({ children }: PropsWithChildren) => {
@@ -11,6 +12,9 @@ export const Canvas = ({ children }: PropsWithChildren) => {
     useMouseDown();
     useMouseUp();
     useMouseMove();
+
+    // render
+    useRender();
 
     useEffect(() => {
         const canvas = canvasRef.current;
