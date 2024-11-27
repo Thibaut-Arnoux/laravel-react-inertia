@@ -1,5 +1,6 @@
 import { Drawable } from '@/classes/Drawable';
 import { Rectangle } from '@/classes/Rectangle';
+import { Triangle } from '@/classes/Triangle';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useEffect, useRef } from 'react';
 
@@ -39,18 +40,17 @@ export const Shape = () => {
                 drawable.current = new Rectangle(x, y, width, height);
                 drawable.current.draw(ctx);
                 break;
+            case 'triangle':
+                drawable.current = new Triangle(x, y, width, height);
+                drawable.current.draw(ctx);
+                break;
             default:
                 break;
         }
     }, [ctx, redraw, mouseLeftClick, mouseMove, shapeMode]);
 
     useEffect(() => {
-        if (
-            mouseLeftClick ||
-            !drawable.current ||
-            (!drawable.current.width && !drawable.current.height)
-        )
-            return;
+        if (mouseLeftClick || !drawable.current?.isValid()) return;
 
         drawStack.current.push(drawable.current);
         drawable.current = null;

@@ -8,8 +8,7 @@ export const ShapePanel = () => {
             <button
                 className={
                     'btn btn-square btn-outline btn-sm rounded-none border-none' +
-                    // TODO
-                    (shapeMode === 'rectangle' ? '' : '')
+                    (shapeMode === 'rectangle' ? ' text-blue-400' : '')
                 }
                 onClick={() => {
                     setShapeMode((shape) =>
