@@ -8,4 +8,8 @@ export class Line extends Drawable {
         ctx.lineTo(this.x + this.width, this.y + this.height);
         ctx.stroke();
     }
+
+    isValid(): boolean {
+        return this.width !== 0 && this.height !== 0;
+    }
 }
