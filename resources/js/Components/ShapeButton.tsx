@@ -1,4 +1,6 @@
+import { Line } from '@/Components/Icons/Line';
 import { Rectangle } from '@/Components/Icons/Rectangle';
+import { RightTriangle } from '@/Components/Icons/RightTriangle';
 import { Triangle } from '@/Components/Icons/Triangle';
 import { useCanvas } from '@/hooks/useCanvas';
 import { ShapeMode } from '@/types/shape';
@@ -33,6 +35,10 @@ const ShapeIcon = ({ shapeButtonMode }: ShapeButtonProps) => {
             return <Rectangle />;
         case 'triangle':
             return <Triangle />;
+        case 'rightTriangle':
+            return <RightTriangle />;
+        case 'line':
+            return <Line />;
         default:
             return <></>;
     }

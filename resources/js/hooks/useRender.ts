@@ -1,5 +1,7 @@
 import { Drawable } from '@/classes/Drawable';
+import { Line } from '@/classes/Line';
 import { Rectangle } from '@/classes/Rectangle';
+import { RightTriangle } from '@/classes/RightTriangle';
 import { Triangle } from '@/classes/Triangle';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useEffect, useRef } from 'react';
@@ -55,6 +57,19 @@ export const useRender = () => {
                 break;
             case 'triangle':
                 drawable.current = new Triangle(x, y, width, height);
+                drawable.current.draw(ctx);
+                break;
+            case 'rightTriangle':
+                drawable.current = new RightTriangle(x, y, width, height);
+                drawable.current.draw(ctx);
+                break;
+            case 'line':
+                drawable.current = new Line(
+                    startX,
+                    startY,
+                    endX - startX,
+                    endY - startY,
+                );
                 drawable.current.draw(ctx);
                 break;
             default:

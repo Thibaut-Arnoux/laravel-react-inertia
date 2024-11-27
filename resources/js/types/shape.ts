@@ -1,1 +1,6 @@
-export type ShapeMode = 'rectangle' | 'circle' | 'line' | 'triangle';
+export type ShapeMode =
+    | 'rectangle'
+    | 'circle'
+    | 'line'
+    | 'triangle'
+    | 'rightTriangle';
