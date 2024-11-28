@@ -1,11 +1,13 @@
 import { ButtonEnum } from '@/enums/button';
 import { useCanvas } from '@/hooks/useCanvas';
+import { useCanvasActions } from '@/hooks/useCanvasStore';
 import { useMouseEventActions } from '@/hooks/useMouseEvent';
 import { useEventListener } from 'usehooks-ts';
 
 export const useMouseDown = () => {
-    const { canvasRef, setIsDrawing } = useCanvas();
+    const { canvasRef } = useCanvas();
     const { setMouseLeftClick } = useMouseEventActions();
+    const { setIsDrawing } = useCanvasActions();
 
     const handleMouseDown = (e: MouseEvent) => {
         switch (e.button) {

@@ -2,7 +2,7 @@ import { Line } from '@/Components/Icons/Line';
 import { Rectangle } from '@/Components/Icons/Rectangle';
 import { RightTriangle } from '@/Components/Icons/RightTriangle';
 import { Triangle } from '@/Components/Icons/Triangle';
-import { useCanvas } from '@/hooks/useCanvas';
+import { useCanvasActions, useShapeMode } from '@/hooks/useCanvasStore';
 import { ShapeMode } from '@/types/shape';
 
 export type ShapeButtonProps = {
@@ -10,7 +10,8 @@ export type ShapeButtonProps = {
 };
 
 export const ShapeButton = ({ shapeButtonMode }: ShapeButtonProps) => {
-    const { shapeMode, setShapeMode } = useCanvas();
+    const shapeMode = useShapeMode();
+    const { setShapeMode } = useCanvasActions();
 
     return (
         <button
@@ -19,8 +20,8 @@ export const ShapeButton = ({ shapeButtonMode }: ShapeButtonProps) => {
                 (shapeMode === shapeButtonMode ? 'text-blue-400' : '')
             }
             onClick={() =>
-                setShapeMode((shape) =>
-                    shape === shapeButtonMode ? null : shapeButtonMode,
+                setShapeMode(
+                    shapeMode === shapeButtonMode ? null : shapeButtonMode,
                 )
             }
         >
