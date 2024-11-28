@@ -6,7 +6,7 @@ import { Triangle } from '@/classes/Triangle';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useEffect, useRef } from 'react';
 
-const extractCoordinates = (
+const extractBoundingRect = (
     startX: number,
     startY: number,
     endX: number,
@@ -40,7 +40,7 @@ export const useRender = () => {
 
         const { offsetX: startX, offsetY: startY } = mouseLeftClick;
         const { offsetX: endX, offsetY: endY } = mouseMove;
-        const { x, y, width, height } = extractCoordinates(
+        const { x, y, width, height } = extractBoundingRect(
             startX,
             startY,
             endX,

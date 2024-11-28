@@ -1,7 +1,7 @@
 import { Canvas } from '@/Components/Canvas';
 import { Hud } from '@/Components/Hud/Hud';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { CanvasProvider } from '@/hooks/useCanvas';
+import { CanvasProvider } from '@/providers/canvasProvider';
 import { Head } from '@inertiajs/react';
 
 const Paint = () => {
