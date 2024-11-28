@@ -1,4 +1,4 @@
-import { useMouseMove } from '@/hooks/useMouseEvent';
+import { useMouseMove } from '@/hooks/useMouseEventStore';
 
 export const Coordinates = () => {
     const mouseMove = useMouseMove();

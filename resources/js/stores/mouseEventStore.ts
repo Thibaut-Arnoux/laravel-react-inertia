@@ -9,6 +9,7 @@ type MouseEventActions = {
     actions: {
         setMouseLeftClick: (mouseLeftLick: MouseEvent | null) => void;
         setMouseMove: (mouseMove: MouseEvent | null) => void;
+        resetMouseEventState: () => void;
     };
 };
 
@@ -23,6 +24,7 @@ export const mouseEventStore = create<MouseEventState & MouseEventActions>(
         actions: {
             setMouseLeftClick: (mouseLeftClick) => set({ mouseLeftClick }),
             setMouseMove: (mouseMove) => set({ mouseMove }),
+            resetMouseEventState: () => set(initialState),
         },
     }),
 );

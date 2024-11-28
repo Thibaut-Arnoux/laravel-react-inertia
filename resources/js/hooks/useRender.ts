@@ -5,7 +5,7 @@ import { RightTriangle } from '@/classes/RightTriangle';
 import { Triangle } from '@/classes/Triangle';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useShapeMode } from '@/hooks/useCanvasStore';
-import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEvent';
+import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEventStore';
 import { useEffect, useRef } from 'react';
 
 const extractBoundingRect = (

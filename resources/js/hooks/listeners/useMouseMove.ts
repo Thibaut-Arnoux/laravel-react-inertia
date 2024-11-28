@@ -1,5 +1,5 @@
 import { useCanvas } from '@/hooks/useCanvas';
-import { useMouseEventActions } from '@/hooks/useMouseEvent';
+import { useMouseEventActions } from '@/hooks/useMouseEventStore';
 import { useEventListener } from 'usehooks-ts';
 
 export const useMouseMove = () => {
