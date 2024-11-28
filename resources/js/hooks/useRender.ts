@@ -4,6 +4,7 @@ import { Rectangle } from '@/classes/Rectangle';
 import { RightTriangle } from '@/classes/RightTriangle';
 import { Triangle } from '@/classes/Triangle';
 import { useCanvas } from '@/hooks/useCanvas';
+import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEvent';
 import { useEffect, useRef } from 'react';
 
 const extractBoundingRect = (
@@ -24,14 +25,9 @@ const extractBoundingRect = (
 };
 
 export const useRender = () => {
-    const {
-        canvasRef,
-        redraw,
-        drawStack,
-        shapeMode,
-        mouseLeftClick,
-        mouseMove,
-    } = useCanvas();
+    const { canvasRef, redraw, drawStack, shapeMode } = useCanvas();
+    const mouseLeftClick = useMouseLeftClick();
+    const mouseMove = useMouseMove();
     const ctx = canvasRef.current?.getContext('2d');
     const drawable = useRef<Drawable | null>(null);
 

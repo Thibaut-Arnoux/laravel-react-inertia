@@ -16,10 +16,6 @@ type CanvasContextProps = {
     redraw: () => void;
     isDrawing: boolean;
     setIsDrawing: Dispatch<SetStateAction<boolean>>;
-    mouseLeftClick: MouseEvent | null;
-    setMouseLeftClick: Dispatch<SetStateAction<MouseEvent | null>>;
-    mouseMove: MouseEvent | null;
-    setMouseMove: Dispatch<SetStateAction<MouseEvent | null>>;
     shapeMode: ShapeMode | null;
     setShapeMode: Dispatch<SetStateAction<ShapeMode | null>>;
 };
@@ -30,10 +26,6 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const drawStack = useRef<Drawable[]>([]);
     const [isDrawing, setIsDrawing] = useState<boolean>(false);
-    const [mouseLeftClick, setMouseLeftClick] = useState<MouseEvent | null>(
-        null,
-    );
-    const [mouseMove, setMouseMove] = useState<MouseEvent | null>(null);
     const [shapeMode, setShapeMode] = useState<ShapeMode | null>(null);
 
     const redraw = () => {
@@ -52,16 +44,12 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         });
     };
 
-    const initialValue = {
+    const initialValue: CanvasContextProps = {
         canvasRef,
         drawStack,
         redraw,
         isDrawing,
         setIsDrawing,
-        mouseLeftClick,
-        setMouseLeftClick,
-        mouseMove,
-        setMouseMove,
         shapeMode,
         setShapeMode,
     };

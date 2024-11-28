@@ -1,5 +1,5 @@
-import { CanvasContext } from "@/providers/canvasProvider";
-import { useContext } from "react";
+import { CanvasContext } from '@/providers/canvasProvider';
+import { useContext } from 'react';
 
 export const useCanvas = () => {
     const context = useContext(CanvasContext);
