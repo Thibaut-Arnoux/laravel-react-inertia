@@ -1,6 +1,6 @@
-import { Drawable } from './Drawable';
+import { Shape } from './Shape';
 
-export class RightTriangle extends Drawable {
+export class RightTriangle extends Shape {
     draw(ctx: CanvasRenderingContext2D) {
         ctx.beginPath();
         ctx.lineWidth = 2;

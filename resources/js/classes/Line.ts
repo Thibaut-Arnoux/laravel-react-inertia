@@ -1,15 +1,27 @@
-import { Drawable } from './Drawable';
+import { IDrawable } from './IDrawable';
 
-export class Line extends Drawable {
+export class Line implements IDrawable {
+    startX: number;
+    startY: number;
+    endX: number;
+    endY: number;
+
+    constructor(startX: number, startY: number, endX: number, endY: number) {
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
+    }
+
     draw(ctx: CanvasRenderingContext2D) {
         ctx.beginPath();
         ctx.lineWidth = 2;
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(this.x + this.width, this.y + this.height);
+        ctx.moveTo(this.startX, this.startY);
+        ctx.lineTo(this.endX, this.endY);
         ctx.stroke();
     }
 
     isValid(): boolean {
-        return this.width !== 0 && this.height !== 0;
+        return this.startX !== this.endX && this.startY !== this.endY;
     }
 }

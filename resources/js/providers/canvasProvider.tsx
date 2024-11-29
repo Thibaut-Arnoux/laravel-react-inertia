@@ -1,4 +1,4 @@
-import { Drawable } from '@/classes/Drawable';
+import { IDrawable } from '@/classes/IDrawable';
 import {
     MutableRefObject,
     PropsWithChildren,
@@ -8,7 +8,7 @@ import {
 
 type CanvasContextProps = {
     canvasRef: MutableRefObject<HTMLCanvasElement | null>;
-    drawStack: MutableRefObject<Drawable[]>;
+    drawStack: MutableRefObject<IDrawable[]>;
     redraw: () => void;
 };
 
@@ -16,7 +16,7 @@ export const CanvasContext = createContext<CanvasContextProps | null>(null);
 
 export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const drawStack = useRef<Drawable[]>([]);
+    const drawStack = useRef<IDrawable[]>([]);
 
     const redraw = () => {
         const ctx = canvasRef.current?.getContext('2d');

@@ -2,36 +2,34 @@ import { Line } from '@/Components/Icons/Line';
 import { Rectangle } from '@/Components/Icons/Rectangle';
 import { RightTriangle } from '@/Components/Icons/RightTriangle';
 import { Triangle } from '@/Components/Icons/Triangle';
-import { useCanvasActions, useShapeMode } from '@/hooks/useCanvasStore';
-import { ShapeMode } from '@/types/shape';
+import { useCanvasActions, useDrawMode } from '@/hooks/useCanvasStore';
+import { DrawMode } from '@/types/draw';
 
-export type ShapeButtonProps = {
-    shapeButtonMode: ShapeMode;
+export type DrawButtonProps = {
+    drawButtonMode: DrawMode;
 };
 
-export const ShapeButton = ({ shapeButtonMode }: ShapeButtonProps) => {
-    const shapeMode = useShapeMode();
-    const { setShapeMode } = useCanvasActions();
+export const DrawButton = ({ drawButtonMode }: DrawButtonProps) => {
+    const drawMode = useDrawMode();
+    const { setDrawMode } = useCanvasActions();
 
     return (
         <button
             className={
                 'btn btn-square btn-outline btn-sm rounded-none border-none ' +
-                (shapeMode === shapeButtonMode ? 'text-blue-400' : '')
+                (drawMode === drawButtonMode ? 'text-blue-400' : '')
             }
             onClick={() =>
-                setShapeMode(
-                    shapeMode === shapeButtonMode ? null : shapeButtonMode,
-                )
+                setDrawMode(drawMode === drawButtonMode ? null : drawButtonMode)
             }
         >
-            <ShapeIcon shapeButtonMode={shapeButtonMode} />
+            <DrawIcon drawButtonMode={drawButtonMode} />
         </button>
     );
 };
 
-const ShapeIcon = ({ shapeButtonMode }: ShapeButtonProps) => {
-    switch (shapeButtonMode) {
+const DrawIcon = ({ drawButtonMode }: DrawButtonProps) => {
+    switch (drawButtonMode) {
         case 'rectangle':
             return <Rectangle />;
         case 'triangle':

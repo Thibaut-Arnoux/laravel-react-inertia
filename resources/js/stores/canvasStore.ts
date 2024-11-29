@@ -1,29 +1,29 @@
-import { ShapeMode } from '@/types/shape';
+import { DrawMode } from '@/types/draw';
 import { create } from 'zustand';
 
 type CanvasState = {
     isDrawing: boolean;
-    shapeMode: ShapeMode | null;
+    drawMode: DrawMode | null;
 };
 
 type CanvasActions = {
     actions: {
         setIsDrawing: (isDrawing: boolean) => void;
-        setShapeMode: (shapeMode: ShapeMode | null) => void;
+        setDrawMode: (drawMode: DrawMode | null) => void;
         resetCanvasState: () => void;
     };
 };
 
 const initialState: CanvasState = {
     isDrawing: false,
-    shapeMode: null,
+    drawMode: null,
 };
 
 export const canvasStore = create<CanvasState & CanvasActions>((set) => ({
     ...initialState,
     actions: {
         setIsDrawing: (isDrawing) => set({ isDrawing }),
-        setShapeMode: (shapeMode) => set({ shapeMode }),
+        setDrawMode: (drawMode) => set({ drawMode }),
         resetCanvasState: () => set(initialState),
     },
 }));

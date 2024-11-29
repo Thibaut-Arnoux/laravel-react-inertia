@@ -1,10 +1,10 @@
-import { Drawable } from '@/classes/Drawable';
+import { IDrawable } from '@/classes/IDrawable';
 import { Line } from '@/classes/Line';
 import { Rectangle } from '@/classes/Rectangle';
 import { RightTriangle } from '@/classes/RightTriangle';
 import { Triangle } from '@/classes/Triangle';
 import { useCanvas } from '@/hooks/useCanvas';
-import { useShapeMode } from '@/hooks/useCanvasStore';
+import { useDrawMode } from '@/hooks/useCanvasStore';
 import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEventStore';
 import { useEffect, useRef } from 'react';
 
@@ -27,14 +27,14 @@ const extractBoundingRect = (
 
 export const useRender = () => {
     const { canvasRef, redraw, drawStack } = useCanvas();
-    const shapeMode = useShapeMode();
+    const drawMode = useDrawMode();
     const mouseLeftClick = useMouseLeftClick();
     const mouseMove = useMouseMove();
     const ctx = canvasRef.current?.getContext('2d');
-    const drawable = useRef<Drawable | null>(null);
+    const drawable = useRef<IDrawable | null>(null);
 
     useEffect(() => {
-        if (!ctx || !mouseMove || !mouseLeftClick || !shapeMode) return;
+        if (!ctx || !mouseMove || !mouseLeftClick || !drawMode) return;
 
         const { offsetX: startX, offsetY: startY } = mouseLeftClick;
         const { offsetX: endX, offsetY: endY } = mouseMove;
@@ -48,7 +48,7 @@ export const useRender = () => {
         redraw();
 
         // Draw rectangle
-        switch (shapeMode) {
+        switch (drawMode) {
             case 'rectangle':
                 drawable.current = new Rectangle(x, y, width, height);
                 drawable.current.draw(ctx);
@@ -62,18 +62,13 @@ export const useRender = () => {
                 drawable.current.draw(ctx);
                 break;
             case 'line':
-                drawable.current = new Line(
-                    startX,
-                    startY,
-                    endX - startX,
-                    endY - startY,
-                );
+                drawable.current = new Line(startX, startY, endX, endY);
                 drawable.current.draw(ctx);
                 break;
             default:
                 break;
         }
-    }, [ctx, redraw, mouseLeftClick, mouseMove, shapeMode]);
+    }, [ctx, redraw, mouseLeftClick, mouseMove, drawMode]);
 
     useEffect(() => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;

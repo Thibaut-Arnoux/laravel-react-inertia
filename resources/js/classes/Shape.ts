@@ -1,4 +1,6 @@
-export abstract class Drawable {
+import { IDrawable } from './IDrawable';
+
+export abstract class Shape implements IDrawable {
     x: number;
     y: number;
     width: number;
