@@ -67,8 +67,16 @@ export const useRender = () => {
                 drawable.current.draw(ctx);
                 break;
             case 'pen':
-                const coordinates = drawable.current instanceof Pen ? [...drawable.current.coordinates, { x: endX, y: endY }] : [];
-                drawable.current = new Pen(startX, startY, coordinates);
+                drawable.current = new Pen(
+                    startX,
+                    startY,
+                    drawable.current instanceof Pen
+                        ? [
+                              ...drawable.current.coordinates,
+                              { x: endX, y: endY },
+                          ]
+                        : [],
+                );
                 drawable.current.draw(ctx);
                 break;
             default:
@@ -80,6 +88,7 @@ export const useRender = () => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;
 
         drawStack.current.push(drawable.current);
+        console.debug(drawStack);
         drawable.current = null;
     }, [mouseLeftClick, drawStack]);
 };
