@@ -4,10 +4,10 @@ import { ChangeEvent } from 'react';
 
 export const Slider = () => {
     const lineWidth = useLineWidth();
-    const { canvasOptions } = useCanvas();
+    const { setCanvasLineWidth } = useCanvas();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        canvasOptions.setCanvasLineWidth(Number(e.target.value));
+        setCanvasLineWidth(Number(e.target.value));
     };
 
     return (

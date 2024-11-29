@@ -4,13 +4,13 @@ import { useRender } from '@/hooks/useRender';
 import { PropsWithChildren, useEffect } from 'react';
 
 export const Canvas = ({ children }: PropsWithChildren) => {
-    const { canvasRef, canvasOptions } = useCanvas();
+    const { canvasRef, initCanvasOptions } = useCanvas();
     useListeners();
     useRender();
 
     useEffect(() => {
-        canvasOptions.initCanvasOptions();
-    }, [canvasRef, canvasOptions]);
+        initCanvasOptions();
+    }, [initCanvasOptions]);
 
     return (
         <>

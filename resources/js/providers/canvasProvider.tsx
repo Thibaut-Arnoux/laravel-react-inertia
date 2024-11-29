@@ -1,5 +1,5 @@
 import { IDrawable } from '@/classes/IDrawable';
-import { CanvasOptions, useCanvasOptions } from '@/hooks/useCanvasOptions';
+import { useCanvasActions } from '@/hooks/useCanvasStore';
 import {
     MutableRefObject,
     PropsWithChildren,
@@ -10,8 +10,9 @@ import {
 type CanvasContextProps = {
     canvasRef: MutableRefObject<HTMLCanvasElement | null>;
     drawStack: MutableRefObject<IDrawable[]>;
-    canvasOptions: CanvasOptions;
     redraw: () => void;
+    initCanvasOptions: () => void;
+    setCanvasLineWidth: (width: number) => void;
 };
 
 export const CanvasContext = createContext<CanvasContextProps | null>(null);
@@ -19,7 +20,7 @@ export const CanvasContext = createContext<CanvasContextProps | null>(null);
 export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const drawStack = useRef<IDrawable[]>([]);
-    const canvasOptions = useCanvasOptions(canvasRef);
+    const { setLineWidth } = useCanvasActions();
 
     const redraw = () => {
         const ctx = canvasRef.current?.getContext('2d');
@@ -37,11 +38,31 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         });
     };
 
+    const initCanvasOptions = () => {
+        const ctx = canvasRef.current?.getContext('2d');
+        if (!ctx || !canvasRef.current) return;
+
+        canvasRef.current.width = window.innerWidth;
+        canvasRef.current.height = window.innerHeight;
+
+        ctx.lineWidth = 2;
+        ctx.save();
+    };
+
+    const setCanvasLineWidth = (width: number) => {
+        const ctx = canvasRef.current?.getContext('2d');
+        if (!ctx) return;
+
+        ctx.lineWidth = width;
+        setLineWidth(width);
+    };
+
     const initialValue: CanvasContextProps = {
         canvasRef,
         drawStack,
-        canvasOptions,
         redraw,
+        initCanvasOptions,
+        setCanvasLineWidth,
     };
 
     return (
