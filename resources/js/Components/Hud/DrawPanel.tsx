@@ -1,4 +1,4 @@
-import { DrawButton } from '../DrawButton';
+import { DrawButton } from '@/Components/DrawButton';
 
 export const DrawPanel = () => {
     return (
@@ -7,6 +7,7 @@ export const DrawPanel = () => {
             <DrawButton drawButtonMode="triangle" />
             <DrawButton drawButtonMode="rightTriangle" />
             <DrawButton drawButtonMode="line" />
+            <DrawButton drawButtonMode="pen" />
         </div>
     );
 };

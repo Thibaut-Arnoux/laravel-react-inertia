@@ -1,5 +1,6 @@
 import { IDrawable } from '@/classes/IDrawable';
 import { Line } from '@/classes/Line';
+import { Pen } from '@/classes/Pen';
 import { Rectangle } from '@/classes/Rectangle';
 import { RightTriangle } from '@/classes/RightTriangle';
 import { Triangle } from '@/classes/Triangle';
@@ -63,6 +64,11 @@ export const useRender = () => {
                 break;
             case 'line':
                 drawable.current = new Line(startX, startY, endX, endY);
+                drawable.current.draw(ctx);
+                break;
+            case 'pen':
+                const coordinates = drawable.current instanceof Pen ? [...drawable.current.coordinates, { x: endX, y: endY }] : [];
+                drawable.current = new Pen(startX, startY, coordinates);
                 drawable.current.draw(ctx);
                 break;
             default:

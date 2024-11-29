@@ -1,4 +1,4 @@
-import { IDrawable } from './IDrawable';
+import { IDrawable } from '@/classes/IDrawable';
 
 export abstract class Shape implements IDrawable {
     x: number;

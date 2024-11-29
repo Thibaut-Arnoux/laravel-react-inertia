@@ -1,4 +1,4 @@
-import { IDrawable } from './IDrawable';
+import { IDrawable } from '@/classes/IDrawable';
 
 export class Line implements IDrawable {
     startX: number;

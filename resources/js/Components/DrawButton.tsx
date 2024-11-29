@@ -1,4 +1,5 @@
 import { Line } from '@/Components/Icons/Line';
+import { Pen } from '@/Components/Icons/Pen';
 import { Rectangle } from '@/Components/Icons/Rectangle';
 import { RightTriangle } from '@/Components/Icons/RightTriangle';
 import { Triangle } from '@/Components/Icons/Triangle';
@@ -38,6 +39,8 @@ const DrawIcon = ({ drawButtonMode }: DrawButtonProps) => {
             return <RightTriangle />;
         case 'line':
             return <Line />;
+        case 'pen':
+            return <Pen />;
         default:
             return <></>;
     }

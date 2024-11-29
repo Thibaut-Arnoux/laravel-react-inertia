@@ -1,3 +1,3 @@
-import { Shape } from './shape';
+import { Shape } from '@/types/shape';
 
-export type DrawMode = Shape | 'line';
+export type DrawMode = Shape | 'line' | 'pen';

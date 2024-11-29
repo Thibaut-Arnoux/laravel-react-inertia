@@ -1,4 +1,4 @@
-import { Shape } from './Shape';
+import { Shape } from '@/classes/Shape';
 
 export class Rectangle extends Shape {
     draw(ctx: CanvasRenderingContext2D) {
