@@ -1,5 +1,6 @@
 import { Canvas } from '@/Components/Canvas';
 import { Hud } from '@/Components/Hud/Hud';
+import { Render } from '@/Components/Render';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { CanvasProvider } from '@/providers/canvasProvider';
 import { Head } from '@inertiajs/react';
@@ -11,7 +12,9 @@ const Paint = () => {
             <div className="overflow-hidden">
                 <CanvasProvider>
                     <Hud />
-                    <Canvas></Canvas>
+                    <Canvas>
+                        <Render />
+                    </Canvas>
                 </CanvasProvider>
             </div>
         </AuthenticatedLayout>

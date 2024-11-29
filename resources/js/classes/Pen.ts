@@ -26,6 +26,6 @@ export class Pen implements IDrawable {
     }
 
     isValid(): boolean {
-        return true;
+        return this.coordinates.length > 0;
     }
 }
