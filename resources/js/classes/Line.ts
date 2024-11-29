@@ -15,7 +15,6 @@ export class Line implements IDrawable {
 
     draw(ctx: CanvasRenderingContext2D) {
         ctx.beginPath();
-        ctx.lineWidth = 2;
         ctx.moveTo(this.startX, this.startY);
         ctx.lineTo(this.endX, this.endY);
         ctx.stroke();

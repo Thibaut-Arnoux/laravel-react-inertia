@@ -6,6 +6,7 @@ import { DrawPanel } from '@/Components/Hud/DrawPanel';
 import { TopLeft } from '@/Components/Hud/TopLeft';
 import { TopMiddle } from '@/Components/Hud/TopMiddle';
 import { TopRight } from '@/Components/Hud/TopRight';
+import { Slider } from '../Slider';
 
 export const Hud = () => {
     return (
@@ -16,7 +17,9 @@ export const Hud = () => {
             <TopMiddle></TopMiddle>
             <TopRight></TopRight>
 
-            <BottomLeft></BottomLeft>
+            <BottomLeft>
+                <Slider />
+            </BottomLeft>
             <BottomMiddle></BottomMiddle>
             <BottomRight>
                 <Coordinates />

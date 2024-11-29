@@ -87,8 +87,7 @@ export const useRender = () => {
     useEffect(() => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;
 
-        drawStack.current.push(drawable.current);
-        console.debug(drawStack);
+        drawStack.current.unshift(drawable.current);
         drawable.current = null;
     }, [mouseLeftClick, drawStack]);
 };

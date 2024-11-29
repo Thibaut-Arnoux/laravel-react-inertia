@@ -18,7 +18,6 @@ export class Pen implements IDrawable {
 
     draw(ctx: CanvasRenderingContext2D): void {
         ctx.beginPath();
-        ctx.lineWidth = 2;
         ctx.moveTo(this.startX, this.startY);
         this.coordinates.forEach((coordinate) => {
             ctx.lineTo(coordinate.x, coordinate.y);
