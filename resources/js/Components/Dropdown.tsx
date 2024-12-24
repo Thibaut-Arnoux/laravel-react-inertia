@@ -1,4 +1,3 @@
-import { Transition } from '@headlessui/react';
 import { InertiaLinkProps, Link } from '@inertiajs/react';
 import {
     createContext,
@@ -78,15 +77,7 @@ const Content = ({
 
     return (
         <>
-            <Transition
-                show={open}
-                enter="transition ease-out duration-200"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-            >
+            {open && (
                 <div
                     className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
                     onClick={() => setOpen(false)}
@@ -100,7 +91,7 @@ const Content = ({
                         {children}
                     </div>
                 </div>
-            </Transition>
+            )}
         </>
     );
 };
@@ -114,7 +105,7 @@ const DropdownLink = ({
         <Link
             {...props}
             className={
-                'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none ' +
+                'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none ' +
                 className
             }
         >

@@ -1,4 +1,3 @@
-import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
@@ -38,12 +37,11 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     type="email"
                     name="email"
                     value={data.email}
-                    className="mt-1 block w-full"
+                    errorMessage={errors.email}
+                    className="block w-full"
                     isFocused={true}
                     onChange={(e) => setData('email', e.target.value)}
                 />
-
-                <InputError message={errors.email} className="mt-2" />
 
                 <div className="mt-4 flex items-center justify-end">
                     <PrimaryButton className="ms-4" disabled={processing}>

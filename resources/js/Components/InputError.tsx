@@ -4,10 +4,15 @@ export default function InputError({
     message,
     className = '',
     ...props
-}: HTMLAttributes<HTMLParagraphElement> & { message?: string }) {
+}: HTMLAttributes<HTMLSpanElement> & { message?: string }) {
     return message ? (
-        <p {...props} className={'text-sm text-red-600 ' + className}>
-            {message}
-        </p>
+        <div className="label">
+            <span
+                {...props}
+                className={'label-text-alt text-red-600 ' + className}
+            >
+                {message}
+            </span>
+        </div>
     ) : null;
 }
