@@ -1,6 +1,5 @@
 import DangerButton from '@/Components/DangerButton';
 import { Modal, ModalContent, ModalFooter } from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useRef } from 'react';
@@ -43,7 +42,6 @@ export default function DeleteUserForm({
     const closeModal = () => {
         clearErrors();
         reset();
-        modalRef.current?.close();
     };
 
     return (
@@ -65,7 +63,11 @@ export default function DeleteUserForm({
                 Delete Account
             </DangerButton>
 
-            <Modal ref={modalRef} className="w-1/2 max-w-3xl">
+            <Modal
+                ref={modalRef}
+                className="w-1/2 max-w-3xl"
+                onClose={closeModal}
+            >
                 <form onSubmit={deleteUser}>
                     <ModalContent>
                         <h2 className="text-lg font-medium text-gray-900">
@@ -98,10 +100,6 @@ export default function DeleteUserForm({
                     </ModalContent>
 
                     <ModalFooter>
-                        <SecondaryButton onClick={closeModal}>
-                            Cancel
-                        </SecondaryButton>
-
                         <DangerButton className="ms-3" disabled={processing}>
                             Delete Account
                         </DangerButton>

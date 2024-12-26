@@ -2,20 +2,25 @@ import { forwardRef, HtmlHTMLAttributes, PropsWithChildren } from 'react';
 
 export const Modal = forwardRef<
     HTMLDialogElement,
-    PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>>
+    PropsWithChildren<
+        HtmlHTMLAttributes<HTMLDivElement> & { onClose: () => void }
+    >
 >(function Modal(
     {
+        onClose,
         className = '',
         children,
         ...props
-    }: PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>>,
+    }: PropsWithChildren<
+        HtmlHTMLAttributes<HTMLDivElement> & { onClose: () => void }
+    >,
     ref,
 ) {
     return (
         <dialog ref={ref} className="modal">
             <div {...props} className={'modal-box ' + className}>
                 {/* Use to close modal from x button */}
-                <form method="dialog">
+                <form method="dialog" onSubmit={onClose}>
                     <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">
                         ✕
                     </button>
@@ -24,7 +29,7 @@ export const Modal = forwardRef<
             </div>
 
             {/* Use to close modal when clicking outside */}
-            <form method="dialog" className="modal-backdrop">
+            <form method="dialog" onSubmit={onClose} className="modal-backdrop">
                 <button>Hidden</button>
             </form>
         </dialog>
