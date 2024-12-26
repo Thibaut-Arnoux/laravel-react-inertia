@@ -1,15 +1,16 @@
-import { HtmlHTMLAttributes, PropsWithChildren, RefObject } from 'react';
+import { forwardRef, HtmlHTMLAttributes, PropsWithChildren } from 'react';
 
-export const Modal = ({
-    className = '',
-    children,
+export const Modal = forwardRef<
+    HTMLDialogElement,
+    PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>>
+>(function Modal(
+    {
+        className = '',
+        children,
+        ...props
+    }: PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>>,
     ref,
-    ...props
-}: PropsWithChildren<
-    HtmlHTMLAttributes<HTMLDivElement> & {
-        ref: RefObject<HTMLDialogElement>;
-    }
->) => {
+) {
     return (
         <dialog ref={ref} className="modal">
             <div {...props} className={'modal-box ' + className}>
@@ -28,9 +29,9 @@ export const Modal = ({
             </form>
         </dialog>
     );
-};
+});
 
-const Content = ({
+export const ModalContent = ({
     className = '',
     children,
     ...props
@@ -42,7 +43,7 @@ const Content = ({
     );
 };
 
-const Footer = ({
+export const ModalFooter = ({
     className = '',
     children,
     ...props
@@ -54,5 +55,6 @@ const Footer = ({
     );
 };
 
-Modal.Content = Content;
-Modal.Footer = Footer;
+// could be used in react 19, by migrating forward ref
+// Modal.Content = Content;
+// Modal.Footer = Footer;
