@@ -39,7 +39,7 @@ export default function Authenticated({
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
                             <div className="relative ms-3">
                                 <Dropdown
-                                    label="Test User"
+                                    label={user.name}
                                     className="dropdown-end"
                                 >
                                     <Dropdown.Content className="w-48">
