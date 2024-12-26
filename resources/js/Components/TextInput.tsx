@@ -1,28 +1,27 @@
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import {
-    forwardRef,
     InputHTMLAttributes,
+    RefObject,
     useEffect,
     useImperativeHandle,
     useRef,
 } from 'react';
 
-export default forwardRef(function TextInput(
-    {
-        type = 'text',
-        className = '',
-        label,
-        errorMessage,
-        isFocused = false,
-        ...props
-    }: InputHTMLAttributes<HTMLInputElement> & {
-        label?: string;
-        errorMessage?: string;
-        isFocused?: boolean;
-    },
+export default function TextInput({
+    type = 'text',
+    className = '',
+    label,
+    errorMessage,
+    isFocused = false,
     ref,
-) {
+    ...props
+}: InputHTMLAttributes<HTMLInputElement> & {
+    ref?: RefObject<unknown>;
+    label?: string;
+    errorMessage?: string;
+    isFocused?: boolean;
+}) {
     const localRef = useRef<HTMLInputElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -50,4 +49,4 @@ export default forwardRef(function TextInput(
             <InputError message={errorMessage} />
         </label>
     );
-});
+}
