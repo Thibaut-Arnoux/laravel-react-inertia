@@ -9,7 +9,7 @@ export default function InputError({
         <div className="label">
             <span
                 {...props}
-                className={'label-text-alt text-red-600 ' + className}
+                className={'label-text-alt text-error ' + className}
             >
                 {message}
             </span>

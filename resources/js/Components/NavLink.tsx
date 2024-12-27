@@ -10,10 +10,10 @@ export default function NavLink({
         <Link
             {...props}
             className={
-                'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium leading-5 focus:outline-none ' +
+                'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium leading-5 text-base-content focus:border-primary focus:outline-none ' +
                 (active
-                    ? 'border-indigo-400 text-gray-900 focus:border-indigo-700'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 focus:border-gray-300 focus:text-gray-700') +
+                    ? 'border-primary'
+                    : 'border-transparent opacity-80 hover:border-primary hover:text-base-content hover:opacity-100 focus:text-base-content focus:opacity-100') +
                 className
             }
         >

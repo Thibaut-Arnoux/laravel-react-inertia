@@ -15,14 +15,14 @@ export default function Authenticated({
         useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="border-b border-gray-100 bg-white">
+        <div className="min-h-screen bg-base-200">
+            <nav className="border-b bg-base-100">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <ApplicationLogo className="block h-9 w-auto fill-current text-base-content" />
                                 </Link>
                             </div>
 
@@ -67,7 +67,7 @@ export default function Authenticated({
                                         (previousState) => !previousState,
                                     )
                                 }
-                                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
+                                className="inline-flex items-center justify-center rounded-md p-2 text-base-content hover:bg-base-content hover:bg-opacity-10 focus:bg-base-content focus:bg-opacity-10 focus:outline-none"
                             >
                                 <svg
                                     className="h-6 w-6"
@@ -120,10 +120,10 @@ export default function Authenticated({
 
                     <div className="border-t border-gray-200 pb-1 pt-4">
                         <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">
+                            <div className="text-base font-medium text-base-content">
                                 {user.name}
                             </div>
-                            <div className="text-sm font-medium text-gray-500">
+                            <div className="text-sm font-medium text-base-content text-opacity-80">
                                 {user.email}
                             </div>
                         </div>
@@ -145,7 +145,7 @@ export default function Authenticated({
             </nav>
 
             {header && (
-                <header className="bg-white shadow">
+                <header className="bg-base-100 shadow">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         {header}
                     </div>
