@@ -1,130 +1,65 @@
-import { Transition } from '@headlessui/react';
-import { InertiaLinkProps, Link } from '@inertiajs/react';
-import {
-    createContext,
-    Dispatch,
-    PropsWithChildren,
-    SetStateAction,
-    useContext,
-    useState,
-} from 'react';
+import { Link as InertiaLink, InertiaLinkProps } from '@inertiajs/react';
+import { HtmlHTMLAttributes, PropsWithChildren } from 'react';
 
-const DropDownContext = createContext<{
-    open: boolean;
-    setOpen: Dispatch<SetStateAction<boolean>>;
-    toggleOpen: () => void;
-}>({
-    open: false,
-    setOpen: () => {},
-    toggleOpen: () => {},
-});
-
-const Dropdown = ({ children }: PropsWithChildren) => {
-    const [open, setOpen] = useState(false);
-
-    const toggleOpen = () => {
-        setOpen((previousState) => !previousState);
-    };
-
+export const Dropdown = ({
+    label,
+    className = '',
+    children,
+    ...props
+}: PropsWithChildren<
+    HtmlHTMLAttributes<HTMLDetailsElement> & {
+        label: string;
+    }
+>) => {
     return (
-        <DropDownContext.Provider value={{ open, setOpen, toggleOpen }}>
-            <div className="relative">{children}</div>
-        </DropDownContext.Provider>
-    );
-};
-
-const Trigger = ({ children }: PropsWithChildren) => {
-    const { open, setOpen, toggleOpen } = useContext(DropDownContext);
-
-    return (
-        <>
-            <div onClick={toggleOpen}>{children}</div>
-
-            {open && (
-                <div
-                    className="fixed inset-0 z-40"
-                    onClick={() => setOpen(false)}
-                ></div>
-            )}
-        </>
+        <details {...props} className={'dropdown ' + className}>
+            <summary className="btn btn-ghost font-medium">
+                {label}
+                <svg
+                    className="-me-0.5 ms-2 h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                >
+                    <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                    />
+                </svg>
+            </summary>
+            {children}
+        </details>
     );
 };
 
 const Content = ({
-    align = 'right',
-    width = '48',
-    contentClasses = 'py-1 bg-white',
-    children,
-}: PropsWithChildren<{
-    align?: 'left' | 'right';
-    width?: '48';
-    contentClasses?: string;
-}>) => {
-    const { open, setOpen } = useContext(DropDownContext);
-
-    let alignmentClasses = 'origin-top';
-
-    if (align === 'left') {
-        alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right start-0';
-    } else if (align === 'right') {
-        alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
-    }
-
-    let widthClasses = '';
-
-    if (width === '48') {
-        widthClasses = 'w-48';
-    }
-
-    return (
-        <>
-            <Transition
-                show={open}
-                enter="transition ease-out duration-200"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-            >
-                <div
-                    className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
-                    onClick={() => setOpen(false)}
-                >
-                    <div
-                        className={
-                            `rounded-md ring-1 ring-black ring-opacity-5 ` +
-                            contentClasses
-                        }
-                    >
-                        {children}
-                    </div>
-                </div>
-            </Transition>
-        </>
-    );
-};
-
-const DropdownLink = ({
     className = '',
     children,
     ...props
-}: InertiaLinkProps) => {
+}: PropsWithChildren<HtmlHTMLAttributes<HTMLUListElement>>) => {
     return (
-        <Link
+        <ul
             {...props}
             className={
-                'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none ' +
+                'menu dropdown-content z-[1] rounded-box bg-base-100 p-2 shadow ' +
                 className
             }
         >
             {children}
-        </Link>
+        </ul>
     );
 };
 
-Dropdown.Trigger = Trigger;
-Dropdown.Content = Content;
-Dropdown.Link = DropdownLink;
+const Link = ({ className = '', children, ...props }: InertiaLinkProps) => {
+    return (
+        <li>
+            <InertiaLink {...props} className={className}>
+                {children}
+            </InertiaLink>
+        </li>
+    );
+};
 
-export default Dropdown;
+Dropdown.Content = Content;
+Dropdown.Link = Link;
