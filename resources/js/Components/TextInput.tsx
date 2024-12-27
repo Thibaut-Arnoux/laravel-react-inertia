@@ -1,3 +1,5 @@
+import InputError from '@/Components/InputError';
+import InputLabel from '@/Components/InputLabel';
 import {
     forwardRef,
     InputHTMLAttributes,
@@ -10,9 +12,15 @@ export default forwardRef(function TextInput(
     {
         type = 'text',
         className = '',
+        label,
+        errorMessage,
         isFocused = false,
         ...props
-    }: InputHTMLAttributes<HTMLInputElement> & { isFocused?: boolean },
+    }: InputHTMLAttributes<HTMLInputElement> & {
+        label?: string;
+        errorMessage?: string;
+        isFocused?: boolean;
+    },
     ref,
 ) {
     const localRef = useRef<HTMLInputElement>(null);
@@ -28,14 +36,18 @@ export default forwardRef(function TextInput(
     }, [isFocused]);
 
     return (
-        <input
-            {...props}
-            type={type}
-            className={
-                'rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 ' +
-                className
-            }
-            ref={localRef}
-        />
+        <label className="form-control">
+            <InputLabel htmlFor={props.id} value={label} />
+            <input
+                {...props}
+                type={type}
+                className={
+                    `input input-bordered ${errorMessage && 'input-error'} ` +
+                    className
+                }
+                ref={localRef}
+            />
+            <InputError message={errorMessage} />
+        </label>
     );
 });
