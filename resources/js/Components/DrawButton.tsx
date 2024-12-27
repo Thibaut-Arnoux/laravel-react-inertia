@@ -18,7 +18,7 @@ export const DrawButton = ({ drawButtonMode }: DrawButtonProps) => {
         <button
             className={
                 'btn btn-square btn-outline btn-sm rounded-none border-none ' +
-                (drawMode === drawButtonMode ? 'text-blue-400' : '')
+                (drawMode === drawButtonMode ? 'text-primary' : '')
             }
             onClick={() =>
                 setDrawMode(drawMode === drawButtonMode ? null : drawButtonMode)
