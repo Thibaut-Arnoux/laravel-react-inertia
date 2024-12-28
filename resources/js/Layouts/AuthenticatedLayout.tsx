@@ -19,7 +19,10 @@ export default function Authenticated({
         useState(false);
 
     return (
-        <div data-theme={theme} className="flex h-screen flex-col bg-base-200">
+        <div
+            data-theme={theme}
+            className="flex min-h-screen flex-col bg-base-200"
+        >
             <nav className="border-b bg-base-100">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">

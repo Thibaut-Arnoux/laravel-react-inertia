@@ -6,6 +6,7 @@ import {
     createContext,
     useRef,
 } from 'react';
+import { useWindowSize } from 'usehooks-ts';
 
 type CanvasContextProps = {
     canvasRef: MutableRefObject<HTMLCanvasElement | null>;
@@ -21,6 +22,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const drawStack = useRef<IDrawable[]>([]);
     const { setLineWidth } = useCanvasActions();
+    const { width = 0, height = 0 } = useWindowSize();
 
     const redraw = () => {
         const ctx = canvasRef.current?.getContext('2d');
@@ -42,8 +44,8 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         const ctx = canvasRef.current?.getContext('2d');
         if (!ctx || !canvasRef.current) return;
 
-        canvasRef.current.width = window.innerWidth;
-        canvasRef.current.height = window.innerHeight;
+        canvasRef.current.width = width;
+        canvasRef.current.height = height - 65;
 
         ctx.lineWidth = 2;
         ctx.save();
