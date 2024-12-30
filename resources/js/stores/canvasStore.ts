@@ -20,7 +20,7 @@ type CanvasActions = {
 const initialState: CanvasState = {
     isDrawing: false,
     drawMode: null,
-    canvasSettings: { lineWidth: 2 },
+    canvasSettings: { lineWidth: 2, strokeStyle: '#000000' },
 };
 
 export const canvasStore = create<CanvasState & CanvasActions>((set) => ({

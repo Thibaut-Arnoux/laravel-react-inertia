@@ -20,7 +20,7 @@ export const Slider = () => {
             max={10}
             value={settings.lineWidth}
             onChange={handleChange}
-            className="range range-xs w-16"
+            className="range range-xs w-full"
         />
     );
 };

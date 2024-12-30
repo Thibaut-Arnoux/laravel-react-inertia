@@ -39,6 +39,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         if (!ctx) return;
 
         ctx.lineWidth = settings.lineWidth;
+        ctx.strokeStyle = settings.strokeStyle;
     };
 
     const initCanvasSettings = () => {
