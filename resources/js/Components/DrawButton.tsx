@@ -14,15 +14,20 @@ export const DrawButton = ({ drawButtonMode }: DrawButtonProps) => {
     const drawMode = useDrawMode();
     const { setDrawMode } = useCanvasActions();
 
+    const isActive = drawMode === drawButtonMode;
+
+    const handleClick = () => {
+        if (isActive) {
+            setDrawMode(null);
+        } else {
+            setDrawMode(drawButtonMode);
+        }
+    };
+
     return (
         <button
-            className={
-                'btn btn-square btn-outline btn-sm rounded-none border-none ' +
-                (drawMode === drawButtonMode ? 'text-primary' : '')
-            }
-            onClick={() =>
-                setDrawMode(drawMode === drawButtonMode ? null : drawButtonMode)
-            }
+            className={`btn btn-square btn-outline btn-sm rounded-none border-none ${isActive && 'text-primary'} `}
+            onClick={handleClick}
         >
             <DrawIcon drawButtonMode={drawButtonMode} />
         </button>
