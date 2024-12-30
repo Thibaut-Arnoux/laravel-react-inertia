@@ -1,17 +1,18 @@
+import { CanvasSettings } from '@/types/canvas';
 import { DrawMode } from '@/types/draw';
 import { create } from 'zustand';
 
 type CanvasState = {
     isDrawing: boolean;
     drawMode: DrawMode | null;
-    lineWidth: number;
+    canvasSettings: CanvasSettings;
 };
 
 type CanvasActions = {
     actions: {
         setIsDrawing: (isDrawing: boolean) => void;
         setDrawMode: (drawMode: DrawMode | null) => void;
-        setLineWidth: (lineWidth: number) => void;
+        setCanvasSettings: (canvasSettings: CanvasSettings) => void;
         resetCanvasState: () => void;
     };
 };
@@ -19,7 +20,7 @@ type CanvasActions = {
 const initialState: CanvasState = {
     isDrawing: false,
     drawMode: null,
-    lineWidth: 2,
+    canvasSettings: { lineWidth: 2 },
 };
 
 export const canvasStore = create<CanvasState & CanvasActions>((set) => ({
@@ -27,7 +28,7 @@ export const canvasStore = create<CanvasState & CanvasActions>((set) => ({
     actions: {
         setIsDrawing: (isDrawing) => set({ isDrawing }),
         setDrawMode: (drawMode) => set({ drawMode }),
-        setLineWidth: (lineWidth) => set({ lineWidth }),
+        setCanvasSettings: (canvasSettings) => set({ canvasSettings }),
         resetCanvasState: () => set(initialState),
     },
 }));

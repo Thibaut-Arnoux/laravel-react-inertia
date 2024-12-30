@@ -5,7 +5,7 @@ import { Rectangle } from '@/classes/Rectangle';
 import { RightTriangle } from '@/classes/RightTriangle';
 import { Triangle } from '@/classes/Triangle';
 import { useCanvas } from '@/hooks/useCanvas';
-import { useDrawMode } from '@/hooks/useCanvasStore';
+import { useCanvasSettings, useDrawMode } from '@/hooks/useCanvasStore';
 import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEventStore';
 import { useEffect, useRef } from 'react';
 
@@ -27,12 +27,15 @@ const extractBoundingRect = (
 };
 
 export const useRender = () => {
-    const { canvasRef, redraw, drawStack } = useCanvas();
+    const drawable = useRef<IDrawable | null>(null);
+
     const drawMode = useDrawMode();
+    const { canvasRef, redraw, drawStack } = useCanvas();
+    const canvasSettings = useCanvasSettings();
     const mouseLeftClick = useMouseLeftClick();
     const mouseMove = useMouseMove();
+
     const ctx = canvasRef.current?.getContext('2d');
-    const drawable = useRef<IDrawable | null>(null);
 
     useEffect(() => {
         if (!ctx || !mouseMove || !mouseLeftClick || !drawMode) return;
@@ -48,7 +51,6 @@ export const useRender = () => {
 
         redraw();
 
-        // Draw rectangle
         switch (drawMode) {
             case 'rectangle':
                 drawable.current = new Rectangle(x, y, width, height);
@@ -87,7 +89,10 @@ export const useRender = () => {
     useEffect(() => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;
 
-        drawStack.current.unshift(drawable.current);
+        drawStack.current.unshift({
+            drawable: drawable.current,
+            settings: canvasSettings,
+        });
         drawable.current = null;
-    }, [mouseLeftClick, drawStack]);
+    }, [mouseLeftClick, drawStack, canvasSettings]);
 };
