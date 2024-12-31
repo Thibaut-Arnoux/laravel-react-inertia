@@ -15,21 +15,24 @@ type CanvasActions = {
         setIsDrawing: (isDrawing: boolean) => void;
         setDrawMode: (drawMode: DrawMode | null) => void;
         setCanvasSettings: (canvasSettings: CanvasSettings) => void;
+        resetCanvasSettings: () => void;
         resetCanvasState: () => void;
     };
 };
 
 // use fonction instead of object to bind theme
+const initialCanvasSettings = (): CanvasSettings => ({
+    lineWidth: CanvasDefaultSettings.LINE_WIDTH,
+    strokeStyle:
+        themeStore.getState().theme === ThemeEnum.LIGHT
+            ? CanvasDefaultSettings.STROKE_DARK
+            : CanvasDefaultSettings.STROKE_LIGHT,
+});
+
 const initialState = (): CanvasState => ({
     isDrawing: false,
     drawMode: null,
-    canvasSettings: {
-        lineWidth: CanvasDefaultSettings.LINE_WIDTH,
-        strokeStyle:
-            themeStore.getState().theme === ThemeEnum.LIGHT
-                ? CanvasDefaultSettings.STROKE_DARK
-                : CanvasDefaultSettings.STROKE_LIGHT,
-    },
+    canvasSettings: initialCanvasSettings(),
 });
 
 export const canvasStore = create<CanvasState & CanvasActions>((set) => ({
@@ -38,6 +41,8 @@ export const canvasStore = create<CanvasState & CanvasActions>((set) => ({
         setIsDrawing: (isDrawing) => set({ isDrawing }),
         setDrawMode: (drawMode) => set({ drawMode }),
         setCanvasSettings: (canvasSettings) => set({ canvasSettings }),
+        resetCanvasSettings: () =>
+            set({ canvasSettings: initialCanvasSettings() }),
         resetCanvasState: () => set(initialState()),
     },
 }));

@@ -17,6 +17,7 @@ type CanvasContextProps = {
     >;
     initCanvasSettings: () => void;
     syncCanvasSettings: (settings: CanvasSettings) => void;
+    syncResetCanvasSettings: () => void;
     redraw: () => void;
 };
 
@@ -28,7 +29,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         { drawable: IDrawable; settings: CanvasSettings }[]
     >([]);
 
-    const { setCanvasSettings } = useCanvasActions();
+    const { setCanvasSettings, resetCanvasSettings } = useCanvasActions();
     const { width = 0, height = 0 } = useWindowSize();
 
     /**
@@ -54,11 +55,13 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
     };
 
     const syncCanvasSettings = (settings: CanvasSettings) => {
-        const ctx = canvasRef.current?.getContext('2d');
-        if (!ctx) return;
-
-        _setCanvasSettings(settings);
         setCanvasSettings(settings);
+        _setCanvasSettings(settings);
+    };
+
+    const syncResetCanvasSettings = () => {
+        resetCanvasSettings();
+        _setCanvasSettings(canvasStore.getState().canvasSettings);
     };
 
     const redraw = () => {
@@ -85,6 +88,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         drawStack,
         initCanvasSettings,
         syncCanvasSettings,
+        syncResetCanvasSettings,
         redraw,
     };
 

@@ -1,15 +1,23 @@
 import { ColorButton } from '@/Components/ColorButton';
 import { ColorPickerButton } from '@/Components/ColorPickerButton';
 import { Slider } from '@/Components/Slider';
+import { useCanvas } from '@/hooks/useCanvas';
 import { useDrawMode } from '@/hooks/useCanvasStore';
 import { CanvasDefaultSettings } from '@/types/canvas';
+import { useEffect } from 'react';
 
 export const DrawSettingsPanel = () => {
     const drawMode = useDrawMode();
 
-    if (!drawMode) {
-        return null;
-    }
+    return drawMode && <DrawSettingsPanelContent />;
+};
+
+const DrawSettingsPanelContent = () => {
+    const { syncResetCanvasSettings } = useCanvas();
+
+    useEffect(() => {
+        syncResetCanvasSettings();
+    }, [syncResetCanvasSettings]);
 
     return (
         <ul className="menu w-56 rounded-box bg-base-200">

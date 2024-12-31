@@ -3,10 +3,10 @@ import { BottomLeft } from '@/Components/Hud/BottomLeft';
 import { BottomMiddle } from '@/Components/Hud/BottomMiddle';
 import { BottomRight } from '@/Components/Hud/BottomRight';
 import { DrawPanel } from '@/Components/Hud/DrawPanel';
+import { DrawSettingsPanel } from '@/Components/Hud/DrawSettingsPanel';
 import { TopLeft } from '@/Components/Hud/TopLeft';
 import { TopMiddle } from '@/Components/Hud/TopMiddle';
 import { TopRight } from '@/Components/Hud/TopRight';
-import { DrawSettingsPanel } from './DrawSettingsPanel';
 
 export const Hud = () => {
     return (
