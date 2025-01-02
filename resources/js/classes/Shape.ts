@@ -1,7 +1,7 @@
-import { IDrawable } from '@/classes/IDrawable';
+import { Drawable } from '@/classes/Drawable';
 import { ShapeMode, ShapeModeEnum } from '@/enums/shape';
 
-export abstract class Shape implements IDrawable {
+export abstract class Shape extends Drawable {
     x: number;
     y: number;
     width: number;
@@ -15,6 +15,8 @@ export abstract class Shape implements IDrawable {
         height: number,
         mode: ShapeMode = ShapeModeEnum.STROKE,
     ) {
+        super();
+
         this.x = x;
         this.y = y;
         this.width = width;

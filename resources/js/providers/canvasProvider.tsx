@@ -2,6 +2,7 @@ import { IDrawable } from '@/classes/IDrawable';
 import { useCanvasActions } from '@/hooks/useCanvasStore';
 import { canvasStore } from '@/stores/canvasStore';
 import { CanvasSettings } from '@/types/canvas';
+import { applyCanvasSettings } from '@/utils/canvas';
 import {
     MutableRefObject,
     PropsWithChildren,
@@ -12,9 +13,7 @@ import { useWindowSize } from 'usehooks-ts';
 
 type CanvasContextProps = {
     canvasRef: MutableRefObject<HTMLCanvasElement | null>;
-    drawStack: MutableRefObject<
-        { drawable: IDrawable; settings: CanvasSettings }[]
-    >;
+    drawStack: MutableRefObject<IDrawable[]>;
     initCanvasSettings: () => void;
     syncCanvasSettings: (settings: CanvasSettings) => void;
     syncResetCanvasSettings: () => void;
@@ -25,9 +24,7 @@ export const CanvasContext = createContext<CanvasContextProps | null>(null);
 
 export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const drawStack = useRef<
-        { drawable: IDrawable; settings: CanvasSettings }[]
-    >([]);
+    const drawStack = useRef<IDrawable[]>([]);
 
     const { setCanvasSettings, resetCanvasSettings } = useCanvasActions();
     const { width = 0, height = 0 } = useWindowSize();
@@ -39,9 +36,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         const ctx = canvasRef.current?.getContext('2d');
         if (!ctx) return;
 
-        ctx.lineWidth = settings.lineWidth;
-        ctx.strokeStyle = settings.strokeStyle;
-        ctx.fillStyle = settings.fillStyle;
+        applyCanvasSettings(ctx, settings);
     };
 
     const initCanvasSettings = () => {
@@ -76,11 +71,8 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
         // Redraw all drawables
-        drawStack.current.forEach((stackElement) => {
-            ctx.save();
-            _setCanvasSettings(stackElement.settings);
-            stackElement.drawable.draw(ctx);
-            ctx.restore();
+        drawStack.current.forEach((drawable) => {
+            drawable.redraw(ctx);
         });
     };
 

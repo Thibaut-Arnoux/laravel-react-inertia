@@ -11,24 +11,8 @@ import {
     useShapeMode,
 } from '@/hooks/useCanvasStore';
 import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEventStore';
+import { extractBoundingRect } from '@/utils/canvas';
 import { useEffect, useRef } from 'react';
-
-const extractBoundingRect = (
-    startX: number,
-    startY: number,
-    endX: number,
-    endY: number,
-) => {
-    // Calculate width and height
-    const width = Math.abs(endX - startX);
-    const height = Math.abs(endY - startY);
-
-    // Determine top-left corner coordinates
-    const x = Math.min(startX, endX);
-    const y = Math.min(startY, endY);
-
-    return { x, y, width, height };
-};
 
 export const useRender = () => {
     const drawable = useRef<IDrawable | null>(null);
@@ -106,10 +90,8 @@ export const useRender = () => {
     useEffect(() => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;
 
-        drawStack.current.push({
-            drawable: drawable.current,
-            settings: canvasSettings,
-        });
+        drawable.current.saveSettings(canvasSettings);
+        drawStack.current.push(drawable.current);
         drawable.current = null;
     }, [mouseLeftClick, drawStack, canvasSettings]);
 };

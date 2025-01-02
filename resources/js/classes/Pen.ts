@@ -1,22 +1,24 @@
-import { IDrawable } from '@/classes/IDrawable';
+import { Drawable } from '@/classes/Drawable';
 
 type Coordinate = {
     x: number;
     y: number;
 };
 
-export class Pen implements IDrawable {
+export class Pen extends Drawable {
     startX: number;
     startY: number;
     coordinates: Coordinate[];
 
     constructor(startX: number, startY: number, coordinates: Coordinate[]) {
+        super();
+
         this.startX = startX;
         this.startY = startY;
         this.coordinates = coordinates;
     }
 
-    draw(ctx: CanvasRenderingContext2D): void {
+    public draw(ctx: CanvasRenderingContext2D): void {
         ctx.beginPath();
         ctx.moveTo(this.startX, this.startY);
         this.coordinates.forEach((coordinate) => {
@@ -25,7 +27,7 @@ export class Pen implements IDrawable {
         ctx.stroke();
     }
 
-    isValid(): boolean {
+    public isValid(): boolean {
         return this.coordinates.length > 0;
     }
 }
