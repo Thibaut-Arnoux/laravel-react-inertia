@@ -35,6 +35,7 @@ const initialCanvasSettings = (): CanvasSettings => ({
         themeStore.getState().theme === ThemeEnum.LIGHT
             ? CanvasDefaultSettings.COLOR_DARK
             : CanvasDefaultSettings.COLOR_LIGHT,
+    transparency: CanvasDefaultSettings.TRANSPARENCY,
 });
 
 const initialState = (): CanvasState => ({

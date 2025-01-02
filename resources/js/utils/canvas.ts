@@ -22,6 +22,12 @@ export const applyCanvasSettings = (
     settings: CanvasSettings,
 ) => {
     ctx.lineWidth = settings.lineWidth;
-    ctx.strokeStyle = settings.strokeStyle;
-    ctx.fillStyle = settings.fillStyle;
+
+    const transparencyHex = decimalToHex(settings.transparency);
+    ctx.strokeStyle = settings.strokeStyle + transparencyHex;
+    ctx.fillStyle = settings.fillStyle + transparencyHex;
+};
+
+export const decimalToHex = (decimal: number): string => {
+    return `${decimal.toString(16).padStart(2, '0').toUpperCase()}`;
 };

@@ -1,7 +1,8 @@
 import { ColorButton } from '@/Components/ColorButton';
 import { ColorPickerButton } from '@/Components/ColorPickerButton';
+import { LineWidthSlider } from '@/Components/LineWidthSlider';
 import { ShapeModeToggle } from '@/Components/ShapeModeToggle';
-import { Slider } from '@/Components/Slider';
+import { TransparencySlider } from '@/Components/TransparencySlider';
 import { ShapeModeEnum } from '@/enums/shape';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useCanvasActions, useDrawMode } from '@/hooks/useCanvasStore';
@@ -37,12 +38,13 @@ const DrawSettingsPanelContent = () => {
                         />
                         <ColorPickerButton />
                     </div>
+                    <TransparencySlider className="mt-4 px-4" />
                 </details>
             </li>
             <li>
                 <details open>
                     <summary className="mt-2 text-base-content">Path</summary>
-                    <Slider className="mt-2 px-4" label="Width" />
+                    <LineWidthSlider className="mt-2 px-4" />
                     <ShapeModeToggle className="mt-4 px-4" />
                 </details>
             </li>
