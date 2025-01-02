@@ -1,5 +1,6 @@
 import { ColorButton } from '@/Components/ColorButton';
 import { ColorPickerButton } from '@/Components/ColorPickerButton';
+import { ShapeModeToggle } from '@/Components/ShapeModeToggle';
 import { Slider } from '@/Components/Slider';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useDrawMode } from '@/hooks/useCanvasStore';
@@ -42,6 +43,9 @@ const DrawSettingsPanelContent = () => {
                     </summary>
                     <div className="px-4">
                         <Slider />
+                    </div>
+                    <div className="mt-2 flex flex-row gap-3 px-4">
+                        <ShapeModeToggle />
                     </div>
                 </details>
             </li>

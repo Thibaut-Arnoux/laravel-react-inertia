@@ -1,4 +1,5 @@
 import { Shape } from '@/classes/Shape';
+import { ShapeModeEnum } from '@/enums/shape';
 
 export class RightTriangle extends Shape {
     draw(ctx: CanvasRenderingContext2D) {
@@ -7,6 +8,6 @@ export class RightTriangle extends Shape {
         ctx.lineTo(this.x + this.width, this.y + this.height);
         ctx.lineTo(this.x, this.y + this.height);
         ctx.closePath();
-        ctx.stroke();
+        this.mode === ShapeModeEnum.STROKE ? ctx.stroke() : ctx.fill();
     }
 }

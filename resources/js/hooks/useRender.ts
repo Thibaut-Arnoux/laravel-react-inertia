@@ -5,7 +5,11 @@ import { Rectangle } from '@/classes/Rectangle';
 import { RightTriangle } from '@/classes/RightTriangle';
 import { Triangle } from '@/classes/Triangle';
 import { useCanvas } from '@/hooks/useCanvas';
-import { useCanvasSettings, useDrawMode } from '@/hooks/useCanvasStore';
+import {
+    useCanvasSettings,
+    useDrawMode,
+    useShapeMode,
+} from '@/hooks/useCanvasStore';
 import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEventStore';
 import { useEffect, useRef } from 'react';
 
@@ -30,6 +34,7 @@ export const useRender = () => {
     const drawable = useRef<IDrawable | null>(null);
 
     const drawMode = useDrawMode();
+    const shapeMode = useShapeMode();
     const { canvasRef, redraw, drawStack } = useCanvas();
     const canvasSettings = useCanvasSettings();
     const mouseLeftClick = useMouseLeftClick();
@@ -53,15 +58,27 @@ export const useRender = () => {
 
         switch (drawMode) {
             case 'rectangle':
-                drawable.current = new Rectangle(x, y, width, height);
+                drawable.current = new Rectangle(
+                    x,
+                    y,
+                    width,
+                    height,
+                    shapeMode,
+                );
                 drawable.current.draw(ctx);
                 break;
             case 'triangle':
-                drawable.current = new Triangle(x, y, width, height);
+                drawable.current = new Triangle(x, y, width, height, shapeMode);
                 drawable.current.draw(ctx);
                 break;
             case 'rightTriangle':
-                drawable.current = new RightTriangle(x, y, width, height);
+                drawable.current = new RightTriangle(
+                    x,
+                    y,
+                    width,
+                    height,
+                    shapeMode,
+                );
                 drawable.current.draw(ctx);
                 break;
             case 'line':
@@ -84,7 +101,7 @@ export const useRender = () => {
             default:
                 break;
         }
-    }, [ctx, redraw, mouseLeftClick, mouseMove, drawMode]);
+    }, [ctx, redraw, mouseLeftClick, mouseMove, drawMode, shapeMode]);
 
     useEffect(() => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;
