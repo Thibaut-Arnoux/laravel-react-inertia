@@ -2,8 +2,9 @@ import { ColorButton } from '@/Components/ColorButton';
 import { ColorPickerButton } from '@/Components/ColorPickerButton';
 import { ShapeModeToggle } from '@/Components/ShapeModeToggle';
 import { Slider } from '@/Components/Slider';
+import { ShapeModeEnum } from '@/enums/shape';
 import { useCanvas } from '@/hooks/useCanvas';
-import { useDrawMode } from '@/hooks/useCanvasStore';
+import { useCanvasActions, useDrawMode } from '@/hooks/useCanvasStore';
 import { CanvasDefaultSettings } from '@/types/canvas';
 import { useEffect } from 'react';
 
@@ -14,11 +15,13 @@ export const DrawSettingsPanel = () => {
 };
 
 const DrawSettingsPanelContent = () => {
+    const { setShapeMode } = useCanvasActions();
     const { syncResetCanvasSettings } = useCanvas();
 
     useEffect(() => {
         syncResetCanvasSettings();
-    }, [syncResetCanvasSettings]);
+        setShapeMode(ShapeModeEnum.STROKE);
+    }, [syncResetCanvasSettings, setShapeMode]);
 
     return (
         <ul className="menu w-56 rounded-box bg-base-200 shadow">
