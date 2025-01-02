@@ -1,8 +1,12 @@
 import { useCanvas } from '@/hooks/useCanvas';
 import { useCanvasSettings } from '@/hooks/useCanvasStore';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, HtmlHTMLAttributes } from 'react';
 
-export const Slider = () => {
+export const Slider = ({
+    label,
+    className = '',
+    ...props
+}: HtmlHTMLAttributes<HTMLDivElement> & { label?: string }) => {
     const settings = useCanvasSettings();
     const { syncCanvasSettings } = useCanvas();
 
@@ -14,13 +18,16 @@ export const Slider = () => {
     };
 
     return (
-        <input
-            type="range"
-            min={1}
-            max={10}
-            value={settings.lineWidth}
-            onChange={handleChange}
-            className="range range-xs w-full"
-        />
+        <div {...props} className={'flex flex-row items-center ' + className}>
+            {label && <span className="mr-2">{label}</span>}
+            <input
+                type="range"
+                min={1}
+                max={10}
+                value={settings.lineWidth}
+                onChange={handleChange}
+                className="range range-xs w-full"
+            />
+        </div>
     );
 };

@@ -38,15 +38,9 @@ const DrawSettingsPanelContent = () => {
             </li>
             <li>
                 <details open>
-                    <summary className="my-2 text-base-content">
-                        Line Width
-                    </summary>
-                    <div className="px-4">
-                        <Slider />
-                    </div>
-                    <div className="mt-2 flex flex-row gap-3 px-4">
-                        <ShapeModeToggle />
-                    </div>
+                    <summary className="mt-2 text-base-content">Path</summary>
+                    <Slider className="mt-2 px-4" label="Width" />
+                    <ShapeModeToggle className="mt-4 px-4" />
                 </details>
             </li>
         </ul>
