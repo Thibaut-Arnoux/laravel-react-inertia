@@ -19,7 +19,7 @@ export const Slider = ({
 
     return (
         <div {...props} className={'flex flex-row items-center ' + className}>
-            {label && <span className="mr-2">{label}</span>}
+            {label && <span className="mr-2 text-base-content">{label}</span>}
             <input
                 type="range"
                 min={1}

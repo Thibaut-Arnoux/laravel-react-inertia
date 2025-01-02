@@ -15,7 +15,7 @@ export const ShapeModeToggle = ({
             className={'flex flex-row items-center gap-2 ' + className}
         >
             <span
-                className="cursor-pointer"
+                className="cursor-pointer text-base-content"
                 onClick={() => setShapeMode(ShapeModeEnum.STROKE)}
             >
                 Stroke
@@ -27,7 +27,7 @@ export const ShapeModeToggle = ({
                 checked={shapeMode === ShapeModeEnum.FILL}
             />
             <span
-                className="cursor-pointer"
+                className="cursor-pointer text-base-content"
                 onClick={() => setShapeMode(ShapeModeEnum.FILL)}
             >
                 Fill
