@@ -41,6 +41,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
 
         ctx.lineWidth = settings.lineWidth;
         ctx.strokeStyle = settings.strokeStyle;
+        ctx.fillStyle = settings.fillStyle;
     };
 
     const initCanvasSettings = () => {

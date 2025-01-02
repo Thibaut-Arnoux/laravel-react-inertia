@@ -16,6 +16,7 @@ export const ColorButton = ({
         syncCanvasSettings({
             ...settings,
             strokeStyle: color,
+            fillStyle: color,
         });
     };
 

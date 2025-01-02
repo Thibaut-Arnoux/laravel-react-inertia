@@ -25,8 +25,12 @@ const initialCanvasSettings = (): CanvasSettings => ({
     lineWidth: CanvasDefaultSettings.LINE_WIDTH,
     strokeStyle:
         themeStore.getState().theme === ThemeEnum.LIGHT
-            ? CanvasDefaultSettings.STROKE_DARK
-            : CanvasDefaultSettings.STROKE_LIGHT,
+            ? CanvasDefaultSettings.COLOR_DARK
+            : CanvasDefaultSettings.COLOR_LIGHT,
+    fillStyle:
+        themeStore.getState().theme === ThemeEnum.LIGHT
+            ? CanvasDefaultSettings.COLOR_DARK
+            : CanvasDefaultSettings.COLOR_LIGHT,
 });
 
 const initialState = (): CanvasState => ({

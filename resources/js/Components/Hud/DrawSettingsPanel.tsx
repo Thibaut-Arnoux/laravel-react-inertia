@@ -20,18 +20,16 @@ const DrawSettingsPanelContent = () => {
     }, [syncResetCanvasSettings]);
 
     return (
-        <ul className="menu w-56 rounded-box bg-base-200">
+        <ul className="menu w-56 rounded-box bg-base-200 shadow">
             <li>
                 <details open>
                     <summary className="mb-2 text-base-content">Color</summary>
                     <div className="flex flex-row justify-between px-1">
-                        <ColorButton
-                            color={CanvasDefaultSettings.STROKE_DARK}
-                        />
+                        <ColorButton color={CanvasDefaultSettings.COLOR_DARK} />
                         <ColorButton color="#666666" />
                         <ColorButton color="#ABABAB" />
                         <ColorButton
-                            color={CanvasDefaultSettings.STROKE_LIGHT}
+                            color={CanvasDefaultSettings.COLOR_LIGHT}
                         />
                         <ColorPickerButton />
                     </div>

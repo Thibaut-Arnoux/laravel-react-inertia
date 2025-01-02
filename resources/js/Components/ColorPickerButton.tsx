@@ -16,6 +16,7 @@ export const ColorPickerButton = () => {
             syncCanvasSettings({
                 ...settings,
                 strokeStyle: color,
+                fillStyle: color,
             });
         }
 
@@ -27,6 +28,7 @@ export const ColorPickerButton = () => {
         syncCanvasSettings({
             ...settings,
             strokeStyle: e.target.value,
+            fillStyle: e.target.value,
         });
     };
 
