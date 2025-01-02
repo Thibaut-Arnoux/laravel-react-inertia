@@ -106,7 +106,7 @@ export const useRender = () => {
     useEffect(() => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;
 
-        drawStack.current.unshift({
+        drawStack.current.push({
             drawable: drawable.current,
             settings: canvasSettings,
         });
