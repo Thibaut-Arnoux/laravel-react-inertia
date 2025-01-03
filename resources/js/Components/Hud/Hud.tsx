@@ -7,10 +7,13 @@ import { DrawSettingsPanel } from '@/Components/Hud/DrawSettingsPanel';
 import { TopLeft } from '@/Components/Hud/TopLeft';
 import { TopMiddle } from '@/Components/Hud/TopMiddle';
 import { TopRight } from '@/Components/Hud/TopRight';
+import { useIsDrawing } from '@/hooks/useCanvasStore';
 
 export const Hud = () => {
+    const isDrawing = useIsDrawing();
+
     return (
-        <div>
+        <div className={`${isDrawing && 'pointer-events-none opacity-50'}`}>
             <TopLeft>
                 <DrawPanel />
             </TopLeft>
