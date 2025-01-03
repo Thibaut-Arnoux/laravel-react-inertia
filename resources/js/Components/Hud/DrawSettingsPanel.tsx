@@ -3,16 +3,17 @@ import { ColorPickerButton } from '@/Components/ColorPickerButton';
 import { LineWidthSlider } from '@/Components/LineWidthSlider';
 import { ShapeModeToggle } from '@/Components/ShapeModeToggle';
 import { TransparencySlider } from '@/Components/TransparencySlider';
+import { isDrawableMode } from '@/enums/mode';
 import { ShapeModeEnum } from '@/enums/shape';
 import { useCanvas } from '@/hooks/useCanvas';
-import { useCanvasActions, useDrawMode } from '@/hooks/useCanvasStore';
+import { useCanvasActions, useMode } from '@/hooks/useCanvasStore';
 import { CanvasDefaultSettings } from '@/types/canvas';
 import { useEffect } from 'react';
 
 export const DrawSettingsPanel = () => {
-    const drawMode = useDrawMode();
+    const mode = useMode();
 
-    return drawMode && <DrawSettingsPanelContent />;
+    return isDrawableMode(mode) && <DrawSettingsPanelContent />;
 };
 
 const DrawSettingsPanelContent = () => {

@@ -4,10 +4,11 @@ import { Pen } from '@/classes/Pen';
 import { Rectangle } from '@/classes/Rectangle';
 import { RightTriangle } from '@/classes/RightTriangle';
 import { Triangle } from '@/classes/Triangle';
+import { ModeEnum } from '@/enums/mode';
 import { useCanvas } from '@/hooks/useCanvas';
 import {
     useCanvasSettings,
-    useDrawMode,
+    useMode,
     useShapeMode,
 } from '@/hooks/useCanvasStore';
 import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEventStore';
@@ -17,7 +18,7 @@ import { useEffect, useRef } from 'react';
 export const useRender = () => {
     const drawable = useRef<IDrawable | null>(null);
 
-    const drawMode = useDrawMode();
+    const mode = useMode();
     const shapeMode = useShapeMode();
     const { canvasRef, redraw, drawStack } = useCanvas();
     const canvasSettings = useCanvasSettings();
@@ -27,7 +28,7 @@ export const useRender = () => {
     const ctx = canvasRef.current?.getContext('2d');
 
     useEffect(() => {
-        if (!ctx || !mouseMove || !mouseLeftClick || !drawMode) return;
+        if (!ctx || !mouseMove || !mouseLeftClick || !mode) return;
 
         const { offsetX: startX, offsetY: startY } = mouseLeftClick;
         const { offsetX: endX, offsetY: endY } = mouseMove;
@@ -40,8 +41,8 @@ export const useRender = () => {
 
         redraw();
 
-        switch (drawMode) {
-            case 'rectangle':
+        switch (mode) {
+            case ModeEnum.RECTANGLE:
                 drawable.current = new Rectangle(
                     x,
                     y,
@@ -51,11 +52,11 @@ export const useRender = () => {
                 );
                 drawable.current.draw(ctx);
                 break;
-            case 'triangle':
+            case ModeEnum.TRIANGLE:
                 drawable.current = new Triangle(x, y, width, height, shapeMode);
                 drawable.current.draw(ctx);
                 break;
-            case 'rightTriangle':
+            case ModeEnum.RIGHT_TRIANGLE:
                 drawable.current = new RightTriangle(
                     x,
                     y,
@@ -65,11 +66,11 @@ export const useRender = () => {
                 );
                 drawable.current.draw(ctx);
                 break;
-            case 'line':
+            case ModeEnum.LINE:
                 drawable.current = new Line(startX, startY, endX, endY);
                 drawable.current.draw(ctx);
                 break;
-            case 'pen':
+            case ModeEnum.PEN:
                 drawable.current = new Pen(
                     startX,
                     startY,
@@ -85,7 +86,7 @@ export const useRender = () => {
             default:
                 break;
         }
-    }, [ctx, redraw, mouseLeftClick, mouseMove, drawMode, shapeMode]);
+    }, [ctx, redraw, mouseLeftClick, mouseMove, mode, shapeMode]);
 
     useEffect(() => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;

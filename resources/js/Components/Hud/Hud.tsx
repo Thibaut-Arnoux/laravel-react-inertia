@@ -2,8 +2,8 @@ import { Coordinates } from '@/Components/Coordinates';
 import { BottomLeft } from '@/Components/Hud/BottomLeft';
 import { BottomMiddle } from '@/Components/Hud/BottomMiddle';
 import { BottomRight } from '@/Components/Hud/BottomRight';
-import { DrawPanel } from '@/Components/Hud/DrawPanel';
 import { DrawSettingsPanel } from '@/Components/Hud/DrawSettingsPanel';
+import { ModePanel } from '@/Components/Hud/ModePanel';
 import { TopLeft } from '@/Components/Hud/TopLeft';
 import { TopMiddle } from '@/Components/Hud/TopMiddle';
 import { TopRight } from '@/Components/Hud/TopRight';
@@ -15,7 +15,7 @@ export const Hud = () => {
     return (
         <div className={`${isDrawing && 'pointer-events-none opacity-50'}`}>
             <TopLeft>
-                <DrawPanel />
+                <ModePanel />
             </TopLeft>
             <TopMiddle></TopMiddle>
             <TopRight>

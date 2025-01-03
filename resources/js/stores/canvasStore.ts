@@ -1,13 +1,13 @@
+import { Mode, ModeEnum } from '@/enums/mode';
 import { ShapeMode, ShapeModeEnum } from '@/enums/shape';
 import { ThemeEnum } from '@/enums/theme';
 import { CanvasDefaultSettings, CanvasSettings } from '@/types/canvas';
-import { DrawMode } from '@/types/draw';
 import { create } from 'zustand';
 import { themeStore } from './themeStore';
 
 type CanvasState = {
     isDrawing: boolean;
-    drawMode: DrawMode | null;
+    mode: Mode;
     shapeMode: ShapeMode;
     canvasSettings: CanvasSettings;
 };
@@ -15,7 +15,7 @@ type CanvasState = {
 type CanvasActions = {
     actions: {
         setIsDrawing: (isDrawing: boolean) => void;
-        setDrawMode: (drawMode: DrawMode | null) => void;
+        setMode: (mode: Mode) => void;
         setShapeMode: (shapeMode: ShapeMode) => void;
         toogleShapeMode: () => void;
         setCanvasSettings: (canvasSettings: CanvasSettings) => void;
@@ -40,7 +40,7 @@ const initialCanvasSettings = (): CanvasSettings => ({
 
 const initialState = (): CanvasState => ({
     isDrawing: false,
-    drawMode: null,
+    mode: ModeEnum.DRAGGABLE,
     shapeMode: ShapeModeEnum.STROKE,
     canvasSettings: initialCanvasSettings(),
 });
@@ -49,7 +49,7 @@ export const canvasStore = create<CanvasState & CanvasActions>((set) => ({
     ...initialState(),
     actions: {
         setIsDrawing: (isDrawing) => set({ isDrawing }),
-        setDrawMode: (drawMode) => set({ drawMode }),
+        setMode: (mode) => set({ mode: mode }),
         setShapeMode: (shapeMode) => set({ shapeMode }),
         toogleShapeMode: () =>
             set((state) => ({
