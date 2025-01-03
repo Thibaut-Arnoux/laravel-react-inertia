@@ -1,3 +1,5 @@
+import { ShapeModeEnum } from '@/enums/shape';
+
 export const CanvasDefaultSettings = {
     LINE_WIDTH: 2,
     COLOR_DARK: '#000000',
@@ -11,3 +13,5 @@ export type CanvasSettings = {
     fillStyle: CanvasFillStrokeStyles['fillStyle'];
     transparency: number;
 };
+
+export type ShapeMode = (typeof ShapeModeEnum)[keyof typeof ShapeModeEnum];

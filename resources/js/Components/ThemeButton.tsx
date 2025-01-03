@@ -1,8 +1,9 @@
 import { Moon } from '@/Components/Icons/Moon';
 import { Sun } from '@/Components/Icons/Sun';
-import { Theme, ThemeEnum } from '@/enums/theme';
+import { ThemeEnum } from '@/enums/theme';
 import { useThemeActions } from '@/hooks/useThemeStore';
 import { themeStore } from '@/stores/themeStore';
+import { Theme } from '@/types/theme';
 import { HtmlHTMLAttributes, useEffect, useState } from 'react';
 
 export const ThemeButton = ({

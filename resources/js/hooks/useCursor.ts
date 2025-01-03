@@ -1,6 +1,7 @@
-import { isDrawableMode, ModeEnum } from '@/enums/mode';
+import { ModeEnum } from '@/enums/mode';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useIsDrawing, useMode } from '@/hooks/useCanvasStore';
+import { isDrawableMode } from '@/types/mode';
 import { useEffect } from 'react';
 
 export const useCursor = () => {

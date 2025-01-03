@@ -1,4 +1,5 @@
-import { Theme, ThemeEnum } from '@/enums/theme';
+import { ThemeEnum } from '@/enums/theme';
+import { Theme } from '@/types/theme';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 

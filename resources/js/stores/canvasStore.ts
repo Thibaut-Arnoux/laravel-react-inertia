@@ -1,9 +1,14 @@
-import { Mode, ModeEnum } from '@/enums/mode';
-import { ShapeMode, ShapeModeEnum } from '@/enums/shape';
+import { ModeEnum } from '@/enums/mode';
+import { ShapeModeEnum } from '@/enums/shape';
 import { ThemeEnum } from '@/enums/theme';
-import { CanvasDefaultSettings, CanvasSettings } from '@/types/canvas';
+import { themeStore } from '@/stores/themeStore';
+import {
+    CanvasDefaultSettings,
+    CanvasSettings,
+    ShapeMode,
+} from '@/types/canvas';
+import { Mode } from '@/types/mode';
 import { create } from 'zustand';
-import { themeStore } from './themeStore';
 
 type CanvasState = {
     isDrawing: boolean;

@@ -1,5 +1,6 @@
 import { Drawable } from '@/classes/Drawable';
-import { ShapeMode, ShapeModeEnum } from '@/enums/shape';
+import { ShapeModeEnum } from '@/enums/shape';
+import { ShapeMode } from '@/types/canvas';
 
 export abstract class Shape extends Drawable {
     x: number;

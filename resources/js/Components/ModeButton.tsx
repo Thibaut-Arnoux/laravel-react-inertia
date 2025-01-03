@@ -4,8 +4,9 @@ import { Pen } from '@/Components/Icons/Pen';
 import { Rectangle } from '@/Components/Icons/Rectangle';
 import { RightTriangle } from '@/Components/Icons/RightTriangle';
 import { Triangle } from '@/Components/Icons/Triangle';
-import { Mode, ModeEnum } from '@/enums/mode';
+import { ModeEnum } from '@/enums/mode';
 import { useCanvasActions, useMode } from '@/hooks/useCanvasStore';
+import { Mode } from '@/types/mode';
 
 export type ModeButtonProps = {
     modeButton: Mode;

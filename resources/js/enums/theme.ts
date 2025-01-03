@@ -4,5 +4,3 @@ export const ThemeEnum = {
 } as const;
 
 export const ThemeList = Object.values(ThemeEnum);
-
-export type Theme = (typeof ThemeEnum)[keyof typeof ThemeEnum];

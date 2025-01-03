@@ -4,5 +4,3 @@ export const ButtonEnum = {
 } as const;
 
 export const ButtonList = Object.values(ButtonEnum);
-
-export type Button = (typeof ButtonEnum)[keyof typeof ButtonEnum];
