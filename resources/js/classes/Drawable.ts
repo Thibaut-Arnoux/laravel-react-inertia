@@ -3,7 +3,7 @@ import { CanvasSettings } from '@/types/canvas';
 import { applyCanvasSettings } from '@/utils/canvas';
 
 export abstract class Drawable implements IDrawable {
-    settings?: CanvasSettings;
+    protected settings?: CanvasSettings;
 
     private _applyCanvasSettings = (ctx: CanvasRenderingContext2D) => {
         if (this.settings === undefined) return;

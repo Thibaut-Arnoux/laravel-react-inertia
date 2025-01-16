@@ -3,11 +3,11 @@ import { ShapeModeEnum } from '@/enums/shape';
 import { ShapeMode } from '@/types/canvas';
 
 export abstract class Shape extends Drawable {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    mode: ShapeMode;
+    public x: number;
+    public y: number;
+    public width: number;
+    public height: number;
+    public mode: ShapeMode;
 
     constructor(
         x: number,
@@ -27,7 +27,7 @@ export abstract class Shape extends Drawable {
 
     abstract draw(ctx: CanvasRenderingContext2D): void;
 
-    isValid(): boolean {
+    public isValid(): boolean {
         return this.width > 0 && this.height > 0;
     }
 }

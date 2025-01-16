@@ -6,9 +6,9 @@ type Coordinate = {
 };
 
 export class Pen extends Drawable {
-    startX: number;
-    startY: number;
-    coordinates: Coordinate[];
+    public startX: number;
+    public startY: number;
+    public coordinates: Coordinate[];
 
     constructor(startX: number, startY: number, coordinates: Coordinate[]) {
         super();

@@ -1,10 +1,10 @@
 import { Drawable } from '@/classes/Drawable';
 
 export class Line extends Drawable {
-    startX: number;
-    startY: number;
-    endX: number;
-    endY: number;
+    public startX: number;
+    public startY: number;
+    public endX: number;
+    public endY: number;
 
     constructor(startX: number, startY: number, endX: number, endY: number) {
         super();
