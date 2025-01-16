@@ -11,6 +11,7 @@ import {
     useMode,
     useShapeMode,
 } from '@/hooks/useCanvasStore';
+import { useDragRender } from '@/hooks/useDragRender';
 import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEventStore';
 import { extractBoundingRect } from '@/utils/canvas';
 import { useEffect, useRef } from 'react';
@@ -24,6 +25,7 @@ export const useRender = () => {
     const canvasSettings = useCanvasSettings();
     const mouseLeftClick = useMouseLeftClick();
     const mouseMove = useMouseMove();
+    const { dragRender } = useDragRender();
 
     const ctx = canvasRef.current?.getContext('2d');
 
@@ -32,12 +34,20 @@ export const useRender = () => {
 
         const { offsetX: startX, offsetY: startY } = mouseLeftClick;
         const { offsetX: endX, offsetY: endY } = mouseMove;
+
+        // prevent redraw if there is no change,
+        // this ensure mouseLeftClick action are triggered before redraw
+        if (startX === endX && startY === endY) return;
+
         const { x, y, width, height } = extractBoundingRect(
             startX,
             startY,
             endX,
             endY,
         );
+
+        // matrix transform before redraw
+        dragRender(endX - startX, endY - startY);
 
         redraw();
 
@@ -86,7 +96,7 @@ export const useRender = () => {
             default:
                 break;
         }
-    }, [ctx, redraw, mouseLeftClick, mouseMove, mode, shapeMode]);
+    }, [ctx, redraw, dragRender, mouseLeftClick, mouseMove, mode, shapeMode]);
 
     useEffect(() => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;

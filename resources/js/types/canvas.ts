@@ -12,6 +12,7 @@ export type CanvasSettings = {
     strokeStyle: CanvasFillStrokeStyles['strokeStyle'];
     fillStyle: CanvasFillStrokeStyles['fillStyle'];
     transparency: number;
+    transform: DOMMatrix;
 };
 
 export type ShapeMode = (typeof ShapeModeEnum)[keyof typeof ShapeModeEnum];

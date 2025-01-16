@@ -41,6 +41,7 @@ const initialCanvasSettings = (): CanvasSettings => ({
             ? CanvasDefaultSettings.COLOR_DARK
             : CanvasDefaultSettings.COLOR_LIGHT,
     transparency: CanvasDefaultSettings.TRANSPARENCY,
+    transform: new DOMMatrix(), // this will be updated on tranform action (dragging, zooming) for redraw
 });
 
 const initialState = (): CanvasState => ({

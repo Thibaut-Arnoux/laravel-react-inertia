@@ -5,6 +5,8 @@ export interface IDrawable {
 
     redraw(ctx: CanvasRenderingContext2D): void;
 
+    exportSettings(): CanvasSettings | null;
+
     saveSettings(settings: CanvasSettings): void;
 
     isValid(): boolean;
