@@ -31,21 +31,21 @@ export const useDragRender = () => {
     }, [mouseLeftClick, mode]);
 
     const dragRender = (dragX: number, dragY: number) => {
-        if (mode === ModeEnum.DRAGGABLE) {
-            for (const index in drawStack.current) {
-                const drawable = drawStack.current[index];
-                const tranform = tranforms.current[index];
-                const settings = drawable.exportSettings();
+        if (mode !== ModeEnum.DRAGGABLE) return;
 
-                if (!settings) return;
+        for (const index in drawStack.current) {
+            const drawable = drawStack.current[index];
+            const tranform = tranforms.current[index];
+            const settings = drawable.exportSettings();
 
-                const translate = translateMatrix(dragX, dragY);
+            if (!settings) return;
 
-                drawable.saveSettings({
-                    ...settings,
-                    transform: tranform.multiply(translate),
-                });
-            }
+            const translate = translateMatrix(dragX, dragY);
+
+            drawable.saveSettings({
+                ...settings,
+                transform: tranform.multiply(translate),
+            });
         }
     };
 
