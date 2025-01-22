@@ -1,14 +1,15 @@
-import { useCanvasSettings } from '@/hooks/useCanvasStore';
+import { useCanvas } from '@/hooks/useCanvas';
 import { useMouseMove } from '@/hooks/useMouseEventStore';
 
 export const Coordinates = () => {
-    const settings = useCanvasSettings();
+    const { canvasRef } = useCanvas();
     const mouseMove = useMouseMove();
 
+    const ctx = canvasRef.current?.getContext('2d');
     const point = new DOMPoint(
         mouseMove?.offsetX ?? 0,
         mouseMove?.offsetY ?? 0,
-    ).matrixTransform(settings.transform.inverse());
+    ).matrixTransform(ctx?.getTransform().inverse());
 
     const x = point.x.toFixed(0);
     const y = point.y.toFixed(0);

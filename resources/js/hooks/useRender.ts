@@ -1,25 +1,25 @@
 import { useCanvas } from '@/hooks/useCanvas';
+import { useZoom } from '@/hooks/useCanvasStore';
 import { useDragRender } from '@/hooks/useDragRender';
 import { useDrawRender } from '@/hooks/useDrawRender';
 import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEventStore';
 import { useEffect } from 'react';
-import { useCanvasSettings, useZoom } from './useCanvasStore';
 
 export const useRender = () => {
     const zoom = useZoom();
-
-    const { redraw, drawStack, syncCanvasSettings } = useCanvas();
-    const settings = useCanvasSettings();
+    const { canvasRef, redraw } = useCanvas();
     const mouseLeftClick = useMouseLeftClick();
     const mouseMove = useMouseMove();
     const { dragRender } = useDragRender();
     const { drawRender } = useDrawRender();
 
+    const ctx = canvasRef.current?.getContext('2d');
+
     /**
      * Redraw on mouse events
      */
     useEffect(() => {
-        if (!mouseMove || !mouseLeftClick) return;
+        if (!ctx || !mouseMove || !mouseLeftClick) return;
 
         const { offsetX: startX, offsetY: startY } = mouseLeftClick;
         const { offsetX: endX, offsetY: endY } = mouseMove;
@@ -29,12 +29,11 @@ export const useRender = () => {
         if (startX === endX && startY === endY) return;
 
         // convert coordinates to canvas space
-        const inverseMatrix = settings.transform.inverse();
-
+        const inverseTransform = ctx.getTransform().inverse();
         const start = new DOMPoint(startX, startY).matrixTransform(
-            inverseMatrix,
+            inverseTransform,
         );
-        const end = new DOMPoint(endX, endY).matrixTransform(inverseMatrix);
+        const end = new DOMPoint(endX, endY).matrixTransform(inverseTransform);
 
         // matrix transform before redraw
         dragRender(end.x - start.x, end.y - start.y);
@@ -42,46 +41,22 @@ export const useRender = () => {
         redraw();
 
         drawRender(start.x, start.y, end.x, end.y);
-    }, [
-        redraw,
-        dragRender,
-        drawRender,
-        mouseMove,
-        mouseLeftClick,
-        settings.transform,
-    ]);
+    }, [redraw, dragRender, drawRender, mouseMove, mouseLeftClick, ctx]);
 
     /**
      * Redraw on zomm events
      */
     useEffect(() => {
+        if (!ctx) return;
+
         // matrix transform before redraw
-        drawStack.current.forEach((drawable) => {
-            const settings = drawable.exportSettings();
-
-            if (!settings) return;
-
-            // reset scale, zoom including previous scaling
-            const transform = new DOMMatrix(settings.transform.toString());
-            transform.a = 1;
-            transform.d = 1;
-
-            drawable.saveSettings({
-                ...settings,
-                transform: transform.scale(zoom),
-            });
-        });
-
-        const transform = new DOMMatrix(settings.transform.toString());
+        const transform = new DOMMatrix(ctx.getTransform().toString());
         transform.a = 1;
         transform.d = 1;
         transform.scaleSelf(zoom);
 
-        syncCanvasSettings({
-            ...settings,
-            transform: transform,
-        });
+        ctx.setTransform(transform);
 
         redraw();
-    }, [redraw, syncCanvasSettings, zoom, drawStack]);
+    }, [redraw, zoom, ctx]);
 };
