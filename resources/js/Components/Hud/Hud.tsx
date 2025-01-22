@@ -8,6 +8,7 @@ import { TopLeft } from '@/Components/Hud/TopLeft';
 import { TopMiddle } from '@/Components/Hud/TopMiddle';
 import { TopRight } from '@/Components/Hud/TopRight';
 import { useIsDrawing } from '@/hooks/useCanvasStore';
+import { ZoomPanel } from './ZoomPanel';
 
 export const Hud = () => {
     const isDrawing = useIsDrawing();
@@ -22,7 +23,9 @@ export const Hud = () => {
                 <DrawSettingsPanel />
             </TopRight>
 
-            <BottomLeft></BottomLeft>
+            <BottomLeft>
+                <ZoomPanel />
+            </BottomLeft>
             <BottomMiddle></BottomMiddle>
             <BottomRight>
                 <Coordinates />
