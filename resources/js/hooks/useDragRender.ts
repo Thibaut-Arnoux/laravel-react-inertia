@@ -2,7 +2,6 @@ import { ModeEnum } from '@/enums/mode';
 import { useCanvas } from '@/hooks/useCanvas';
 import { useMode } from '@/hooks/useCanvasStore';
 import { useMouseLeftClick } from '@/hooks/useMouseEventStore';
-import { translateMatrix } from '@/utils/matrix';
 import { useEffect, useRef } from 'react';
 
 export const useDragRender = () => {
@@ -40,11 +39,9 @@ export const useDragRender = () => {
 
             if (!settings) return;
 
-            const translate = translateMatrix(dragX, dragY);
-
             drawable.saveSettings({
                 ...settings,
-                transform: tranform.multiply(translate),
+                transform: tranform.translate(dragX, dragY),
             });
         }
     };
