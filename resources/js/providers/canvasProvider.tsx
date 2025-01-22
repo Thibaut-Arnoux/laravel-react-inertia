@@ -67,8 +67,15 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
 
         if (!ctx || !canvasWidth || !canvasHeight) return;
 
+        const transform = canvasStore.getState().canvasSettings.transform;
+        // apply transform to be in canvas space and clear all canvas
+        const canvasPoint = new DOMPoint(
+            canvasWidth,
+            canvasHeight,
+        ).matrixTransform(transform.inverse());
+
         // Clear the canvas
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.clearRect(0, 0, canvasPoint.x, canvasPoint.y);
 
         // Redraw all drawables
         drawStack.current.forEach((drawable) => {
