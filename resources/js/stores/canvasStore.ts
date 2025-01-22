@@ -29,7 +29,7 @@ type CanvasActions = {
         zoomIn: () => void;
         zoomOut: () => void;
         setCanvasSettings: (canvasSettings: CanvasSettings) => void;
-        resetCanvasSettings: () => void;
+        resetDrawSettings: () => void;
         resetCanvasState: () => void;
     };
 };
@@ -86,8 +86,14 @@ export const canvasStore = create<CanvasState & CanvasActions>((set) => ({
                         : state.zoom - ZoomSettings.STEP,
             })),
         setCanvasSettings: (canvasSettings) => set({ canvasSettings }),
-        resetCanvasSettings: () =>
-            set({ canvasSettings: initialCanvasSettings() }),
+        resetDrawSettings: () =>
+            set((state) => {
+                const transform = state.canvasSettings.transform;
+
+                return {
+                    canvasSettings: { ...initialCanvasSettings(), transform },
+                };
+            }),
         resetCanvasState: () => set(initialState()),
     },
 }));

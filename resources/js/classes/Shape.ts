@@ -25,7 +25,7 @@ export abstract class Shape extends Drawable {
         this.mode = mode;
     }
 
-    abstract draw(ctx: CanvasRenderingContext2D): void;
+    public abstract draw(ctx: CanvasRenderingContext2D): void;
 
     public isValid(): boolean {
         return this.width > 0 && this.height > 0;

@@ -16,7 +16,7 @@ type CanvasContextProps = {
     drawStack: MutableRefObject<IDrawable[]>;
     initCanvasSettings: () => void;
     syncCanvasSettings: (settings: CanvasSettings) => void;
-    syncResetCanvasSettings: () => void;
+    syncResetDrawSettings: () => void;
     redraw: () => void;
 };
 
@@ -26,7 +26,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const drawStack = useRef<IDrawable[]>([]);
 
-    const { setCanvasSettings, resetCanvasSettings } = useCanvasActions();
+    const { setCanvasSettings, resetDrawSettings } = useCanvasActions();
     const { width = 0, height = 0 } = useWindowSize();
 
     /**
@@ -55,8 +55,8 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         _setCanvasSettings(settings);
     };
 
-    const syncResetCanvasSettings = () => {
-        resetCanvasSettings();
+    const syncResetDrawSettings = () => {
+        resetDrawSettings();
         _setCanvasSettings(canvasStore.getState().canvasSettings);
     };
 
@@ -81,7 +81,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         drawStack,
         initCanvasSettings,
         syncCanvasSettings,
-        syncResetCanvasSettings,
+        syncResetDrawSettings,
         redraw,
     };
 
