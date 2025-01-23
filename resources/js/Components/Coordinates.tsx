@@ -6,6 +6,8 @@ export const Coordinates = () => {
     const mouseMove = useMouseMove();
 
     const ctx = canvasRef.current?.getContext('2d');
+
+    // reverse the matrix and move to the transformed space to display 'correct' coordinates
     const point = new DOMPoint(
         mouseMove?.offsetX ?? 0,
         mouseMove?.offsetY ?? 0,

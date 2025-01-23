@@ -28,7 +28,7 @@ export const useRender = () => {
         // this ensure mouseLeftClick action are triggered before redraw
         if (startX === endX && startY === endY) return;
 
-        // convert coordinates to canvas space
+        // reverse the matrix and map coordinates to the transformed space
         const inverseTransform = ctx.getTransform().inverse();
         const start = new DOMPoint(startX, startY).matrixTransform(
             inverseTransform,

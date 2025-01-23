@@ -67,7 +67,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
 
         if (!ctx || !canvasWidth || !canvasHeight) return;
 
-        // apply transform to be in canvas space and clear all canvas
+        // reverse the matrix and map canvas coordinates to transformed space to clear all canvas
         const inverseTransform = ctx.getTransform().inverse();
         const canvasStart = new DOMPoint(0, 0).matrixTransform(
             inverseTransform,
