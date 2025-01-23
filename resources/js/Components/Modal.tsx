@@ -1,3 +1,4 @@
+import { Cross } from '@/Components/Icons/Cross';
 import { forwardRef, HtmlHTMLAttributes, PropsWithChildren } from 'react';
 
 export const Modal = forwardRef<
@@ -22,7 +23,7 @@ export const Modal = forwardRef<
                 {/* Use to close modal from x button */}
                 <form method="dialog" onSubmit={onClose}>
                     <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">
-                        ✕
+                        <Cross />
                     </button>
                 </form>
                 {children}

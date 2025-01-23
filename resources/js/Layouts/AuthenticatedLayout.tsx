@@ -4,6 +4,7 @@ import { HamburgerButton } from '@/Components/HamburgerButton';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { ThemeButton } from '@/Components/ThemeButton';
+import { useTheme } from '@/hooks/useThemeStore';
 import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
 
@@ -12,12 +13,16 @@ export default function Authenticated({
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
     const user = usePage().props.auth.user;
+    const theme = useTheme();
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
     return (
-        <div className="min-h-screen bg-base-200">
+        <div
+            data-theme={theme}
+            className="flex min-h-screen flex-col bg-base-200"
+        >
             <nav className="border-b bg-base-100">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
@@ -34,6 +39,12 @@ export default function Authenticated({
                                     active={route().current('dashboard')}
                                 >
                                     Dashboard
+                                </NavLink>
+                                <NavLink
+                                    href={route('paint')}
+                                    active={route().current('paint')}
+                                >
+                                    Paint
                                 </NavLink>
                             </div>
                         </div>
@@ -90,6 +101,12 @@ export default function Authenticated({
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('paint')}
+                            active={route().current('paint')}
+                        >
+                            Paint
+                        </ResponsiveNavLink>
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4">
@@ -126,7 +143,7 @@ export default function Authenticated({
                 </header>
             )}
 
-            <main>{children}</main>
+            {children}
         </div>
     );
 }
