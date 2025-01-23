@@ -18,12 +18,12 @@ export const DrawSettingsPanel = () => {
 
 const DrawSettingsPanelContent = () => {
     const { setShapeMode } = useCanvasActions();
-    const { syncResetCanvasSettings } = useCanvas();
+    const { syncResetDrawSettings } = useCanvas();
 
     useEffect(() => {
-        syncResetCanvasSettings();
+        syncResetDrawSettings();
         setShapeMode(ShapeModeEnum.STROKE);
-    }, [syncResetCanvasSettings, setShapeMode]);
+    }, [syncResetDrawSettings, setShapeMode]);
 
     return (
         <ul className="menu w-56 rounded-box bg-base-200 shadow">

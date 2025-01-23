@@ -25,8 +25,6 @@ export const applyCanvasSettings = (
     const transparencyHex = decimalToHex(settings.transparency);
     ctx.strokeStyle = settings.strokeStyle + transparencyHex;
     ctx.fillStyle = settings.fillStyle + transparencyHex;
-
-    ctx.setTransform(settings.transform);
 };
 
 export const decimalToHex = (decimal: number): string => {

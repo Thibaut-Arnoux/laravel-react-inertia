@@ -16,7 +16,7 @@ type CanvasContextProps = {
     drawStack: MutableRefObject<IDrawable[]>;
     initCanvasSettings: () => void;
     syncCanvasSettings: (settings: CanvasSettings) => void;
-    syncResetCanvasSettings: () => void;
+    syncResetDrawSettings: () => void;
     redraw: () => void;
 };
 
@@ -26,7 +26,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const drawStack = useRef<IDrawable[]>([]);
 
-    const { setCanvasSettings, resetCanvasSettings } = useCanvasActions();
+    const { setCanvasSettings, resetDrawSettings } = useCanvasActions();
     const { width = 0, height = 0 } = useWindowSize();
 
     /**
@@ -55,8 +55,8 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         _setCanvasSettings(settings);
     };
 
-    const syncResetCanvasSettings = () => {
-        resetCanvasSettings();
+    const syncResetDrawSettings = () => {
+        resetDrawSettings();
         _setCanvasSettings(canvasStore.getState().canvasSettings);
     };
 
@@ -67,8 +67,23 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
 
         if (!ctx || !canvasWidth || !canvasHeight) return;
 
+        // reverse the matrix and map canvas coordinates to transformed space to clear all canvas
+        const inverseTransform = ctx.getTransform().inverse();
+        const canvasStart = new DOMPoint(0, 0).matrixTransform(
+            inverseTransform,
+        );
+        const canvasDim = new DOMPoint(
+            canvasWidth,
+            canvasHeight,
+        ).matrixTransform(inverseTransform);
+
         // Clear the canvas
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.clearRect(
+            canvasStart.x,
+            canvasStart.y,
+            Math.abs(canvasStart.x) + Math.abs(canvasDim.x),
+            Math.abs(canvasStart.y) + Math.abs(canvasDim.y),
+        );
 
         // Redraw all drawables
         drawStack.current.forEach((drawable) => {
@@ -81,7 +96,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         drawStack,
         initCanvasSettings,
         syncCanvasSettings,
-        syncResetCanvasSettings,
+        syncResetDrawSettings,
         redraw,
     };
 

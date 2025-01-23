@@ -6,6 +6,7 @@ import {
     CanvasDefaultSettings,
     CanvasSettings,
     ShapeMode,
+    ZoomSettings,
 } from '@/types/canvas';
 import { Mode } from '@/types/mode';
 import { create } from 'zustand';
@@ -14,6 +15,7 @@ type CanvasState = {
     isDrawing: boolean;
     mode: Mode;
     shapeMode: ShapeMode;
+    zoom: number;
     canvasSettings: CanvasSettings;
 };
 
@@ -23,8 +25,11 @@ type CanvasActions = {
         setMode: (mode: Mode) => void;
         setShapeMode: (shapeMode: ShapeMode) => void;
         toogleShapeMode: () => void;
+        setZoom: (zoom: number) => void;
+        zoomIn: () => void;
+        zoomOut: () => void;
         setCanvasSettings: (canvasSettings: CanvasSettings) => void;
-        resetCanvasSettings: () => void;
+        resetDrawSettings: () => void;
         resetCanvasState: () => void;
     };
 };
@@ -41,13 +46,13 @@ const initialCanvasSettings = (): CanvasSettings => ({
             ? CanvasDefaultSettings.COLOR_DARK
             : CanvasDefaultSettings.COLOR_LIGHT,
     transparency: CanvasDefaultSettings.TRANSPARENCY,
-    transform: new DOMMatrix(), // this will be updated on tranform action (dragging, zooming) for redraw
 });
 
 const initialState = (): CanvasState => ({
     isDrawing: false,
     mode: ModeEnum.DRAGGABLE,
     shapeMode: ShapeModeEnum.STROKE,
+    zoom: ZoomSettings.DEFAULT,
     canvasSettings: initialCanvasSettings(),
 });
 
@@ -64,8 +69,23 @@ export const canvasStore = create<CanvasState & CanvasActions>((set) => ({
                         ? ShapeModeEnum.STROKE
                         : ShapeModeEnum.FILL,
             })),
+        setZoom: (zoom) => set({ zoom }),
+        zoomIn: () =>
+            set((state) => ({
+                zoom:
+                    state.zoom + ZoomSettings.STEP > ZoomSettings.MAX
+                        ? ZoomSettings.MAX
+                        : state.zoom + ZoomSettings.STEP,
+            })),
+        zoomOut: () =>
+            set((state) => ({
+                zoom:
+                    state.zoom - ZoomSettings.STEP < ZoomSettings.MIN
+                        ? ZoomSettings.MIN
+                        : state.zoom - ZoomSettings.STEP,
+            })),
         setCanvasSettings: (canvasSettings) => set({ canvasSettings }),
-        resetCanvasSettings: () =>
+        resetDrawSettings: () =>
             set({ canvasSettings: initialCanvasSettings() }),
         resetCanvasState: () => set(initialState()),
     },
