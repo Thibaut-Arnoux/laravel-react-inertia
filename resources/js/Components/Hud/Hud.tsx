@@ -7,8 +7,8 @@ import { ModePanel } from '@/Components/Hud/ModePanel';
 import { TopLeft } from '@/Components/Hud/TopLeft';
 import { TopMiddle } from '@/Components/Hud/TopMiddle';
 import { TopRight } from '@/Components/Hud/TopRight';
+import { ZoomPanel } from '@/Components/Hud/ZoomPanel';
 import { useIsDrawing } from '@/hooks/useCanvasStore';
-import { ZoomPanel } from './ZoomPanel';
 
 export const Hud = () => {
     const isDrawing = useIsDrawing();
