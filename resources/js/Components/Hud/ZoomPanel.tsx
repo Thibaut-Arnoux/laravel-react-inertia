@@ -1,5 +1,5 @@
+import { ZoomButton } from '@/Components/ZoomButton';
 import { useZoom } from '@/hooks/useCanvasStore';
-import { ZoomButton } from '../ZoomButton';
 
 export const ZoomPanel = () => {
     const zoom = useZoom();

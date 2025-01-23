@@ -51,8 +51,8 @@ export const useRender = () => {
 
         // matrix transform before redraw
         const transform = new DOMMatrix(ctx.getTransform().toString());
-        transform.a = 1;
-        transform.d = 1;
+        transform.a = 1; // scale x
+        transform.d = 1; // scale y
         transform.scaleSelf(zoom);
 
         ctx.setTransform(transform);
