@@ -23,16 +23,16 @@ export const ZoomSelect = () => {
 
     return (
         <select className="select" value={zoom} onChange={handleChange}>
-            {/* use to display value not included in zoomOptions like 120% */}
-            <option disabled key={zoom} value={zoom}>
-                {zoomPercent(zoom)} %
-            </option>
-
             {zoomOptions.map((zoomOption) => (
                 <option key={zoomOption} value={zoomOption}>
                     {zoomPercent(zoomOption)} %
                 </option>
             ))}
+
+            {/* use to display value not included in zoomOptions like 120% */}
+            <option className="hidden" value={zoom}>
+                {zoomPercent(zoom)} %
+            </option>
         </select>
     );
 };
