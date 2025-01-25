@@ -69,7 +69,16 @@ export const canvasStore = create<CanvasState & CanvasActions>((set) => ({
                         ? ShapeModeEnum.STROKE
                         : ShapeModeEnum.FILL,
             })),
-        setZoom: (zoom) => set({ zoom }),
+        setZoom: (zoom) =>
+            set(() => {
+                if (zoom > ZoomSettings.MAX) {
+                    return { zoom: ZoomSettings.MAX };
+                } else if (zoom < ZoomSettings.MIN) {
+                    return { zoom: ZoomSettings.MIN };
+                } else {
+                    return { zoom };
+                }
+            }),
         zoomIn: () =>
             set((state) => ({
                 zoom:
