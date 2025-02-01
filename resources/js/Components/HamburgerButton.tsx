@@ -9,7 +9,7 @@ export const HamburgerButton = ({
     return (
         <label
             className={
-                'btn btn-circle btn-ghost swap swap-rotate btn-sm p-2 ' +
+                'btn btn-square btn-ghost swap swap-rotate btn-sm p-2 ' +
                 className
             }
         >
