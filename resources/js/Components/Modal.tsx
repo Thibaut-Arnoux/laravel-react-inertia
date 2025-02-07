@@ -61,6 +61,6 @@ export const ModalFooter = ({
     );
 };
 
-// could be used in react 19, by migrating forward ref
+// TODO: could be used in react 19, by migrating forward ref
 // Modal.Content = Content;
 // Modal.Footer = Footer;
