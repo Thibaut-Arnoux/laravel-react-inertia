@@ -1,3 +1,4 @@
+import { HamburgerButton } from '@/Components/HamburgerButton';
 import {
     createContext,
     HtmlHTMLAttributes,
@@ -7,7 +8,6 @@ import {
     useRef,
     useState,
 } from 'react';
-import { HamburgerButton } from './HamburgerButton';
 
 type HamburgerMenuContextProps = {
     open: boolean;
