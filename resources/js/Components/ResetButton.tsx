@@ -1,5 +1,5 @@
+import { Reset } from '@/Components/Icons/Reset';
 import { useCanvas } from '@/hooks/useCanvas';
-import { Reset } from './Icons/Reset';
 
 export const ResetButton = () => {
     const { resetCanvas } = useCanvas();
