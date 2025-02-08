@@ -1,22 +1,18 @@
 import { Cross } from '@/Components/Icons/Cross';
-import { forwardRef, HtmlHTMLAttributes, PropsWithChildren } from 'react';
+import { HtmlHTMLAttributes, PropsWithChildren, RefObject } from 'react';
 
-export const Modal = forwardRef<
-    HTMLDialogElement,
-    PropsWithChildren<
-        HtmlHTMLAttributes<HTMLDivElement> & { onClose: () => void }
-    >
->(function Modal(
-    {
-        onClose,
-        className = '',
-        children,
-        ...props
-    }: PropsWithChildren<
-        HtmlHTMLAttributes<HTMLDivElement> & { onClose: () => void }
-    >,
+export const Modal = ({
+    onClose,
+    className = '',
+    children,
     ref,
-) {
+    ...props
+}: PropsWithChildren<
+    HtmlHTMLAttributes<HTMLDivElement> & {
+        onClose: () => void;
+        ref?: RefObject<HTMLDialogElement>;
+    }
+>) => {
     return (
         <dialog ref={ref} className="modal">
             <div {...props} className={'modal-box ' + className}>
@@ -35,9 +31,9 @@ export const Modal = forwardRef<
             </form>
         </dialog>
     );
-});
+};
 
-export const ModalContent = ({
+const Content = ({
     className = '',
     children,
     ...props
@@ -49,7 +45,7 @@ export const ModalContent = ({
     );
 };
 
-export const ModalFooter = ({
+const Footer = ({
     className = '',
     children,
     ...props
@@ -61,6 +57,5 @@ export const ModalFooter = ({
     );
 };
 
-// TODO: could be used in react 19, by migrating forward ref
-// Modal.Content = Content;
-// Modal.Footer = Footer;
+Modal.Content = Content;
+Modal.Footer = Footer;
