@@ -24,7 +24,7 @@ export const ModeButton = ({ modeButton }: ModeButtonProps) => {
 
     return (
         <button
-            className={`btn btn-square btn-outline btn-sm border-none ${isActive && 'text-primary'} `}
+            className={`btn btn-square btn-ghost btn-sm ${isActive && 'text-primary'} `}
             onClick={handleClick}
         >
             <ModeIcon modeButton={modeButton} />

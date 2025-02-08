@@ -19,7 +19,7 @@ export const ZoomButton = ({ zoomIn }: ZoomButtonProps) => {
 
     return (
         <button
-            className={`btn btn-square btn-outline btn-sm border-none`}
+            className={`btn btn-square btn-ghost btn-sm`}
             onClick={handleClick}
         >
             <ZoomIcon zoomIn={zoomIn} />

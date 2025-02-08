@@ -15,6 +15,7 @@ type CanvasContextProps = {
     canvasRef: MutableRefObject<HTMLCanvasElement | null>;
     drawStack: MutableRefObject<IDrawable[]>;
     initCanvasSettings: () => void;
+    resetCanvas: () => void;
     syncCanvasSettings: (settings: CanvasSettings) => void;
     syncResetDrawSettings: () => void;
     redraw: () => void;
@@ -26,7 +27,8 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const drawStack = useRef<IDrawable[]>([]);
 
-    const { setCanvasSettings, resetDrawSettings } = useCanvasActions();
+    const { setCanvasSettings, resetCanvasState, resetDrawSettings } =
+        useCanvasActions();
     const { width = 0, height = 0 } = useWindowSize();
 
     /**
@@ -39,20 +41,36 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         applyCanvasSettings(ctx, settings);
     };
 
-    const initCanvasSettings = () => {
+    const _ctxCheckPoint = () => {
         const ctx = canvasRef.current?.getContext('2d');
-        if (!ctx || !canvasRef.current) return;
+        if (!ctx) return;
+
+        ctx.restore(); // restore saved from previous reset checkpoint
+        ctx.save(); // save for next reset
+    };
+
+    const initCanvasSettings = () => {
+        if (!canvasRef.current) return;
 
         canvasRef.current.width = width;
         canvasRef.current.height = height - 65;
-        _setCanvasSettings(canvasStore.getState().canvasSettings);
 
-        ctx.save();
+        _setCanvasSettings(canvasStore.getState().canvasSettings);
+        _ctxCheckPoint(); // checkpoint after applying store setting to keep the one overrided
     };
 
     const syncCanvasSettings = (settings: CanvasSettings) => {
         setCanvasSettings(settings);
         _setCanvasSettings(settings);
+    };
+
+    const resetCanvas = () => {
+        drawStack.current = [];
+
+        resetCanvasState();
+        _ctxCheckPoint();
+
+        redraw();
     };
 
     const syncResetDrawSettings = () => {
@@ -95,6 +113,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         canvasRef,
         drawStack,
         initCanvasSettings,
+        resetCanvas,
         syncCanvasSettings,
         syncResetDrawSettings,
         redraw,

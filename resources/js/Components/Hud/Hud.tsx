@@ -1,4 +1,5 @@
 import { Coordinates } from '@/Components/Coordinates';
+import { ActionPanel } from '@/Components/Hud/ActionPanel';
 import { BottomLeft } from '@/Components/Hud/BottomLeft';
 import { BottomMiddle } from '@/Components/Hud/BottomMiddle';
 import { BottomRight } from '@/Components/Hud/BottomRight';
@@ -16,9 +17,11 @@ export const Hud = () => {
     return (
         <div className={`${isDrawing && 'pointer-events-none opacity-50'}`}>
             <TopLeft>
-                <ModePanel />
+                <ActionPanel />
             </TopLeft>
-            <TopMiddle></TopMiddle>
+            <TopMiddle>
+                <ModePanel />
+            </TopMiddle>
             <TopRight>
                 <DrawSettingsPanel />
             </TopRight>
