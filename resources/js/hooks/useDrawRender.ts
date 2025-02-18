@@ -21,7 +21,7 @@ export const useDrawRender = () => {
 
     const mode = useMode();
     const shapeMode = useShapeMode();
-    const { canvasRef, drawStack } = useCanvas();
+    const { canvasRef, drawStack, drawStackTemp } = useCanvas();
     const canvasSettings = useCanvasSettings();
     const mouseLeftClick = useMouseLeftClick();
 
@@ -32,8 +32,9 @@ export const useDrawRender = () => {
 
         drawable.current.saveSettings(canvasSettings);
         drawStack.current.push(drawable.current);
+        drawStackTemp.current = [];
         drawable.current = null;
-    }, [mouseLeftClick, drawStack, canvasSettings]);
+    }, [mouseLeftClick, drawStack, drawStackTemp, canvasSettings]);
 
     const drawRender = (
         startX: number,
