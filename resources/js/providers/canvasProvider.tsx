@@ -14,11 +14,14 @@ import { useWindowSize } from 'usehooks-ts';
 type CanvasContextProps = {
     canvasRef: MutableRefObject<HTMLCanvasElement | null>;
     drawStack: MutableRefObject<IDrawable[]>;
+    drawStackTemp: MutableRefObject<IDrawable[]>;
     initCanvasSettings: () => void;
     resetCanvas: () => void;
     syncCanvasSettings: (settings: CanvasSettings) => void;
     syncResetDrawSettings: () => void;
     redraw: () => void;
+    undo: () => void;
+    redo: () => void;
 };
 
 export const CanvasContext = createContext<CanvasContextProps | null>(null);
@@ -26,6 +29,7 @@ export const CanvasContext = createContext<CanvasContextProps | null>(null);
 export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const drawStack = useRef<IDrawable[]>([]);
+    const drawStackTemp = useRef<IDrawable[]>([]);
 
     const { setCanvasSettings, resetCanvasState, resetDrawSettings } =
         useCanvasActions();
@@ -109,14 +113,33 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         });
     };
 
+    const undo = () => {
+        const temp = drawStack.current?.pop();
+
+        if (temp) drawStackTemp.current?.push(temp);
+
+        redraw();
+    };
+
+    const redo = () => {
+        const temp = drawStackTemp.current?.pop();
+
+        if (temp) drawStack.current?.push(temp);
+
+        redraw();
+    };
+
     const initialValue: CanvasContextProps = {
         canvasRef,
         drawStack,
+        drawStackTemp,
         initCanvasSettings,
         resetCanvas,
         syncCanvasSettings,
         syncResetDrawSettings,
         redraw,
+        undo,
+        redo,
     };
 
     return (
