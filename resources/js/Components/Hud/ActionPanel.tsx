@@ -1,9 +1,9 @@
 import { HamburgerMenu } from '@/Components/HamburgerMenu';
+import { IconButton } from '@/Components/IconButton';
+import { Back } from '@/Components/Icons/Back';
+import { Next } from '@/Components/Icons/Next';
 import { ResetButton } from '@/Components/ResetButton';
 import { useCanvas } from '@/hooks/useCanvas';
-import { IconButton } from '../IconButton';
-import { Back } from '../Icons/Back';
-import { Next } from '../Icons/Next';
 
 export const ActionPanel = () => {
     const { undo, redo } = useCanvas();
