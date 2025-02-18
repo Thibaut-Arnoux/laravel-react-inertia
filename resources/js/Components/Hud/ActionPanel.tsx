@@ -1,10 +1,13 @@
 import { HamburgerMenu } from '@/Components/HamburgerMenu';
 import { ResetButton } from '@/Components/ResetButton';
+import { useCanvas } from '@/hooks/useCanvas';
 import { IconButton } from '../IconButton';
 import { Back } from '../Icons/Back';
 import { Next } from '../Icons/Next';
 
 export const ActionPanel = () => {
+    const { undo, redo } = useCanvas();
+
     const githubLink = import.meta.env.VITE_GITHUB_REPOSITORY;
 
     return (
@@ -16,9 +19,8 @@ export const ActionPanel = () => {
                     </a>
                 </HamburgerMenu.Item>
             </HamburgerMenu>
-            {/* TODO: Implement back and next */}
-            <IconButton icon={<Back />} onClick={() => console.debug('back')} />
-            <IconButton icon={<Next />} onClick={() => console.debug('next')} />
+            <IconButton icon={<Back />} onClick={undo} />
+            <IconButton icon={<Next />} onClick={redo} />
             <ResetButton />
         </div>
     );
