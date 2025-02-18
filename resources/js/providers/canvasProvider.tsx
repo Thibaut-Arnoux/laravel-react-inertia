@@ -70,6 +70,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
 
     const resetCanvas = () => {
         drawStack.current = [];
+        drawStackTemp.current = [];
 
         resetCanvasState();
         _ctxCheckPoint();

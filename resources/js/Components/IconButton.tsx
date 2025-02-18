@@ -1,10 +1,10 @@
-import { HtmlHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 export const IconButton = ({
     className = '',
     icon,
     ...props
-}: HtmlHTMLAttributes<HTMLButtonElement> & { icon: ReactNode }) => {
+}: ButtonHTMLAttributes<HTMLButtonElement> & { icon: ReactNode }) => {
     return (
         <button
             {...props}
