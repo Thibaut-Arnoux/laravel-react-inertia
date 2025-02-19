@@ -1,12 +1,10 @@
 import { useCanvas } from '@/hooks/useCanvas';
-import { useZoom } from '@/hooks/useCanvasStore';
 import { useDragRender } from '@/hooks/useDragRender';
 import { useDrawRender } from '@/hooks/useDrawRender';
 import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEventStore';
 import { useEffect } from 'react';
 
 export const useRender = () => {
-    const zoom = useZoom();
     const { canvasRef, redraw } = useCanvas();
     const mouseLeftClick = useMouseLeftClick();
     const mouseMove = useMouseMove();
@@ -42,21 +40,4 @@ export const useRender = () => {
 
         drawRender(start.x, start.y, end.x, end.y);
     }, [redraw, dragRender, drawRender, mouseMove, mouseLeftClick, ctx]);
-
-    /**
-     * Redraw on zomm events
-     */
-    useEffect(() => {
-        if (!ctx) return;
-
-        // matrix transform before redraw
-        const transform = new DOMMatrix(ctx.getTransform().toString());
-        transform.a = 1; // scale x
-        transform.d = 1; // scale y
-        transform.scaleSelf(zoom);
-
-        ctx.setTransform(transform);
-
-        redraw();
-    }, [redraw, zoom, ctx]);
 };

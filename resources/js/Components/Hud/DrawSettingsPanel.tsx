@@ -4,7 +4,6 @@ import { LineWidthSlider } from '@/Components/LineWidthSlider';
 import { ShapeModeToggle } from '@/Components/ShapeModeToggle';
 import { TransparencySlider } from '@/Components/TransparencySlider';
 import { ShapeModeEnum } from '@/enums/shape';
-import { useCanvas } from '@/hooks/useCanvas';
 import { useCanvasActions, useMode } from '@/hooks/useCanvasStore';
 import { CanvasDefaultSettings } from '@/types/canvas';
 import { isDrawableMode } from '@/types/mode';
@@ -17,13 +16,12 @@ export const DrawSettingsPanel = () => {
 };
 
 const DrawSettingsPanelContent = () => {
-    const { setShapeMode } = useCanvasActions();
-    const { syncResetDrawSettings } = useCanvas();
+    const { setShapeMode, resetDrawSettings } = useCanvasActions();
 
     useEffect(() => {
-        syncResetDrawSettings();
+        resetDrawSettings();
         setShapeMode(ShapeModeEnum.STROKE);
-    }, [syncResetDrawSettings, setShapeMode]);
+    }, [resetDrawSettings, setShapeMode]);
 
     return (
         <ul className="menu w-56 rounded-box bg-base-200 shadow">
