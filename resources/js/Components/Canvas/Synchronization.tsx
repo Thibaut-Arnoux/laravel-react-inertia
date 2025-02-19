@@ -2,7 +2,7 @@ import { useCanvas } from '@/hooks/useCanvas';
 import { useCanvasSettings, useZoom } from '@/hooks/useCanvasStore';
 import { useEffect } from 'react';
 
-export const useSynchronization = () => {
+export const Synchronization = () => {
     const zoom = useZoom();
     const canvasSettings = useCanvasSettings();
     const { zoom: zoomCanvas, setSettings } = useCanvas();
@@ -20,4 +20,6 @@ export const useSynchronization = () => {
     useEffect(() => {
         setSettings(canvasSettings);
     }, [canvasSettings, setSettings]);
+
+    return <></>;
 };

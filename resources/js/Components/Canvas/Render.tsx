@@ -4,7 +4,7 @@ import { useDrawRender } from '@/hooks/useDrawRender';
 import { useMouseLeftClick, useMouseMove } from '@/hooks/useMouseEventStore';
 import { useEffect } from 'react';
 
-export const useRender = () => {
+export const Render = () => {
     const { canvasRef, redraw } = useCanvas();
     const mouseLeftClick = useMouseLeftClick();
     const mouseMove = useMouseMove();
@@ -40,4 +40,6 @@ export const useRender = () => {
 
         drawRender(start.x, start.y, end.x, end.y);
     }, [redraw, dragRender, drawRender, mouseMove, mouseLeftClick, ctx]);
+
+    return <></>;
 };
