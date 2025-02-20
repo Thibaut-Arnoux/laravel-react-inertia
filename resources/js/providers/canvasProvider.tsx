@@ -59,7 +59,7 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         drawStackTemp.current = [];
         ctx.setTransform(new DOMMatrix());
 
-        // reset store, canvas 'ui' properties will be sync in useSynchronization layer
+        // reset store, canvas 'ui' properties will be sync in synchronization layer
         resetCanvasState();
 
         redraw();
