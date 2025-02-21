@@ -1,9 +1,8 @@
-import { Sun } from '@/Components/Icons/Sun';
 import { ThemeEnum } from '@/enums/theme';
 import { useThemeActions } from '@/hooks/useThemeStore';
 import { themeStore } from '@/stores/themeStore';
 import { Theme } from '@/types/theme';
-import { Moon } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 import { HtmlHTMLAttributes, useEffect, useState } from 'react';
 
 export const ThemeButton = ({
