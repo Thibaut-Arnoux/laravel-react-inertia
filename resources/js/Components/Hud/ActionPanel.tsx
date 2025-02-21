@@ -1,12 +1,10 @@
 import { HamburgerMenu } from '@/Components/HamburgerMenu';
 import { IconButton } from '@/Components/IconButton';
-import { Back } from '@/Components/Icons/Back';
-import { Next } from '@/Components/Icons/Next';
-import { ResetButton } from '@/Components/ResetButton';
 import { useCanvas } from '@/hooks/useCanvas';
+import { Redo, RotateCcw, Undo } from 'lucide-react';
 
 export const ActionPanel = () => {
-    const { undo, redo } = useCanvas();
+    const { undo, redo, reset } = useCanvas();
 
     const githubLink = import.meta.env.VITE_GITHUB_REPOSITORY;
 
@@ -19,9 +17,9 @@ export const ActionPanel = () => {
                     </a>
                 </HamburgerMenu.Item>
             </HamburgerMenu>
-            <IconButton icon={<Back />} onClick={undo} />
-            <IconButton icon={<Next />} onClick={redo} />
-            <ResetButton />
+            <IconButton icon={<Undo />} onClick={undo} />
+            <IconButton icon={<Redo />} onClick={redo} />
+            <IconButton icon={<RotateCcw />} onClick={reset} />
         </div>
     );
 };

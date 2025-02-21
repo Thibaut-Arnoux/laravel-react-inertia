@@ -1,12 +1,15 @@
-import { HandGrab } from '@/Components/Icons/HandGrab';
-import { Line } from '@/Components/Icons/Line';
-import { Pen } from '@/Components/Icons/Pen';
-import { Rectangle } from '@/Components/Icons/Rectangle';
-import { RightTriangle } from '@/Components/Icons/RightTriangle';
-import { Triangle } from '@/Components/Icons/Triangle';
+import { IconButton } from '@/Components/IconButton';
 import { ModeEnum } from '@/enums/mode';
 import { useCanvasActions, useMode } from '@/hooks/useCanvasStore';
 import { Mode } from '@/types/mode';
+import {
+    Grab,
+    Pen,
+    PenLine,
+    Square,
+    Triangle,
+    TriangleRight,
+} from 'lucide-react';
 
 export type ModeButtonProps = {
     modeButton: Mode;
@@ -23,29 +26,28 @@ export const ModeButton = ({ modeButton }: ModeButtonProps) => {
     };
 
     return (
-        <button
-            className={`btn btn-square btn-ghost btn-sm ${isActive && 'text-primary'} `}
+        <IconButton
+            className={`${isActive && 'text-primary'}`}
+            icon={<ModeIcon modeButton={modeButton} />}
             onClick={handleClick}
-        >
-            <ModeIcon modeButton={modeButton} />
-        </button>
+        />
     );
 };
 
 const ModeIcon = ({ modeButton }: ModeButtonProps) => {
     switch (modeButton) {
         case ModeEnum.RECTANGLE:
-            return <Rectangle />;
+            return <Square />;
         case ModeEnum.TRIANGLE:
             return <Triangle />;
         case ModeEnum.RIGHT_TRIANGLE:
-            return <RightTriangle />;
+            return <TriangleRight />;
         case ModeEnum.LINE:
-            return <Line />;
+            return <PenLine />;
         case ModeEnum.PEN:
-            return <Pen />;
+            return <Pen size={21} />;
         case ModeEnum.DRAGGABLE:
-            return <HandGrab />;
+            return <Grab />;
         default:
             return <></>;
     }
