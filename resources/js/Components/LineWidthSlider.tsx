@@ -1,16 +1,15 @@
 import { Slider } from '@/Components/Slider';
-import { useCanvas } from '@/hooks/useCanvas';
-import { useCanvasSettings } from '@/hooks/useCanvasStore';
+import { useCanvasActions, useCanvasSettings } from '@/hooks/useCanvasStore';
 import { ChangeEvent, HtmlHTMLAttributes } from 'react';
 
 export const LineWidthSlider = ({
     ...props
 }: HtmlHTMLAttributes<HTMLDivElement>) => {
     const settings = useCanvasSettings();
-    const { syncCanvasSettings } = useCanvas();
+    const { setCanvasSettings } = useCanvasActions();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        syncCanvasSettings({
+        setCanvasSettings({
             ...settings,
             lineWidth: Number(e.target.value),
         });

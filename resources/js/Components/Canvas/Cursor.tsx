@@ -4,7 +4,7 @@ import { useIsDrawing, useMode } from '@/hooks/useCanvasStore';
 import { isDrawableMode } from '@/types/mode';
 import { useEffect } from 'react';
 
-export const useCursor = () => {
+export const Cursor = () => {
     const { canvasRef } = useCanvas();
     const mode = useMode();
     const isDrawing = useIsDrawing();
@@ -19,4 +19,6 @@ export const useCursor = () => {
 
         canvasRef.current.style.cursor = cursor;
     }, [canvasRef, mode, isDrawing]);
+
+    return <></>;
 };

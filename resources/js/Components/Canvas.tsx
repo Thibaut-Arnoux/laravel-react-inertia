@@ -1,16 +1,12 @@
-import { useListeners } from '@/hooks/listeners/useListeners';
 import { useCanvas } from '@/hooks/useCanvas';
-import { useCursor } from '@/hooks/useCursor';
 import { PropsWithChildren, useEffect } from 'react';
 
 export const Canvas = ({ children }: PropsWithChildren) => {
-    const { canvasRef, initCanvasSettings } = useCanvas();
-    useCursor();
-    useListeners();
+    const { canvasRef, initialization } = useCanvas();
 
     useEffect(() => {
-        initCanvasSettings();
-    }, [initCanvasSettings]);
+        initialization();
+    }, [initialization]);
 
     return (
         <>

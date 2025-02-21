@@ -1,5 +1,4 @@
-import { useCanvas } from '@/hooks/useCanvas';
-import { useCanvasSettings } from '@/hooks/useCanvasStore';
+import { useCanvasActions, useCanvasSettings } from '@/hooks/useCanvasStore';
 import { ChangeEvent, useRef, useState } from 'react';
 
 export const ColorPickerButton = () => {
@@ -7,13 +6,13 @@ export const ColorPickerButton = () => {
     const colorPicker = useRef<HTMLInputElement | null>(null);
 
     const settings = useCanvasSettings();
-    const { syncCanvasSettings } = useCanvas();
+    const { setCanvasSettings } = useCanvasActions();
 
     const isActive = settings.strokeStyle === color;
 
     const handleClick = () => {
         if (color) {
-            syncCanvasSettings({
+            setCanvasSettings({
                 ...settings,
                 strokeStyle: color,
                 fillStyle: color,
@@ -25,7 +24,7 @@ export const ColorPickerButton = () => {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setColor(e.target.value);
-        syncCanvasSettings({
+        setCanvasSettings({
             ...settings,
             strokeStyle: e.target.value,
             fillStyle: e.target.value,

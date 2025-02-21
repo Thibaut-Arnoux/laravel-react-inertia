@@ -1,5 +1,4 @@
-import { useCanvas } from '@/hooks/useCanvas';
-import { useCanvasSettings } from '@/hooks/useCanvasStore';
+import { useCanvasActions, useCanvasSettings } from '@/hooks/useCanvasStore';
 import { HtmlHTMLAttributes } from 'react';
 
 export const ColorButton = ({
@@ -8,12 +7,12 @@ export const ColorButton = ({
     ...props
 }: HtmlHTMLAttributes<HTMLDivElement> & { color: string }) => {
     const settings = useCanvasSettings();
-    const { syncCanvasSettings } = useCanvas();
+    const { setCanvasSettings } = useCanvasActions();
 
     const isActive = settings.strokeStyle === color;
 
     const handleClick = () => {
-        syncCanvasSettings({
+        setCanvasSettings({
             ...settings,
             strokeStyle: color,
             fillStyle: color,

@@ -1,6 +1,5 @@
 import { Slider } from '@/Components/Slider';
-import { useCanvas } from '@/hooks/useCanvas';
-import { useCanvasSettings } from '@/hooks/useCanvasStore';
+import { useCanvasActions, useCanvasSettings } from '@/hooks/useCanvasStore';
 import { CanvasDefaultSettings } from '@/types/canvas';
 import { ChangeEvent, HtmlHTMLAttributes } from 'react';
 
@@ -8,10 +7,10 @@ export const TransparencySlider = ({
     ...props
 }: HtmlHTMLAttributes<HTMLDivElement>) => {
     const settings = useCanvasSettings();
-    const { syncCanvasSettings } = useCanvas();
+    const { setCanvasSettings } = useCanvasActions();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        syncCanvasSettings({
+        setCanvasSettings({
             ...settings,
             transparency: Number(e.target.value),
         });
