@@ -1,5 +1,5 @@
 import { Cross } from '@/Components/Icons/Cross';
-import { Hamburger } from '@/Components/Icons/Hamburger';
+import { Menu } from 'lucide-react';
 import { HtmlHTMLAttributes, RefObject } from 'react';
 
 export const HamburgerButton = ({
@@ -19,7 +19,7 @@ export const HamburgerButton = ({
             {/* this hidden checkbox controls the state */}
             <input ref={ref} {...props} className="hidden" type="checkbox" />
 
-            <Hamburger className="swap-off" />
+            <Menu className="swap-off" />
 
             <Cross className="swap-on" />
         </label>
