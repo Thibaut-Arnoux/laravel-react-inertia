@@ -1,5 +1,4 @@
-import { Cross } from '@/Components/Icons/Cross';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { HtmlHTMLAttributes, RefObject } from 'react';
 
 export const HamburgerButton = ({
@@ -21,7 +20,7 @@ export const HamburgerButton = ({
 
             <Menu className="swap-off" />
 
-            <Cross className="swap-on" />
+            <X className="swap-on" />
         </label>
     );
 };

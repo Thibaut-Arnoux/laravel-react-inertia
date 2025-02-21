@@ -1,4 +1,4 @@
-import { Cross } from '@/Components/Icons/Cross';
+import { X } from 'lucide-react';
 import { HtmlHTMLAttributes, PropsWithChildren, RefObject } from 'react';
 
 export const Modal = ({
@@ -19,7 +19,7 @@ export const Modal = ({
                 {/* Use to close modal from x button */}
                 <form method="dialog" onSubmit={onClose}>
                     <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">
-                        <Cross />
+                        <X />
                     </button>
                 </form>
                 {children}
