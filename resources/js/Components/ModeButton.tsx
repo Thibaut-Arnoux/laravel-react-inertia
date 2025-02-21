@@ -1,3 +1,4 @@
+import { IconButton } from '@/Components/IconButton';
 import { ModeEnum } from '@/enums/mode';
 import { useCanvasActions, useMode } from '@/hooks/useCanvasStore';
 import { Mode } from '@/types/mode';
@@ -25,12 +26,11 @@ export const ModeButton = ({ modeButton }: ModeButtonProps) => {
     };
 
     return (
-        <button
-            className={`btn btn-square btn-ghost btn-sm ${isActive && 'text-primary'} `}
+        <IconButton
+            className={`${isActive && 'text-primary'}`}
+            icon={<ModeIcon modeButton={modeButton} />}
             onClick={handleClick}
-        >
-            <ModeIcon modeButton={modeButton} />
-        </button>
+        />
     );
 };
 
