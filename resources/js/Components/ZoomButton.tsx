@@ -1,6 +1,5 @@
-import { Plus } from '@/Components/Icons/Plus';
 import { useCanvasActions } from '@/hooks/useCanvasStore';
-import { Minus } from 'lucide-react';
+import { Minus, Plus } from 'lucide-react';
 
 type ZoomButtonProps = {
     zoomIn: boolean;
