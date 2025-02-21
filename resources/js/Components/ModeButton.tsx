@@ -1,4 +1,3 @@
-import { Line } from '@/Components/Icons/Line';
 import { Pen } from '@/Components/Icons/Pen';
 import { Rectangle } from '@/Components/Icons/Rectangle';
 import { RightTriangle } from '@/Components/Icons/RightTriangle';
@@ -6,7 +5,7 @@ import { Triangle } from '@/Components/Icons/Triangle';
 import { ModeEnum } from '@/enums/mode';
 import { useCanvasActions, useMode } from '@/hooks/useCanvasStore';
 import { Mode } from '@/types/mode';
-import { Grab } from 'lucide-react';
+import { Grab, PenLine } from 'lucide-react';
 
 export type ModeButtonProps = {
     modeButton: Mode;
@@ -41,7 +40,7 @@ const ModeIcon = ({ modeButton }: ModeButtonProps) => {
         case ModeEnum.RIGHT_TRIANGLE:
             return <RightTriangle />;
         case ModeEnum.LINE:
-            return <Line />;
+            return <PenLine />;
         case ModeEnum.PEN:
             return <Pen />;
         case ModeEnum.DRAGGABLE:
