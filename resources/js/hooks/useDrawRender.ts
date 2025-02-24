@@ -11,6 +11,7 @@ import {
     useMode,
     useShapeMode,
 } from '@/hooks/useCanvasStore';
+import { useDrawStackActions } from '@/hooks/useDrawStackStore';
 import { useMouseLeftClick } from '@/hooks/useMouseEventStore';
 import { isDrawableMode } from '@/types/mode';
 import { extractBoundingRect } from '@/utils/canvas';
@@ -21,8 +22,9 @@ export const useDrawRender = () => {
 
     const mode = useMode();
     const shapeMode = useShapeMode();
-    const { canvasRef, drawStack, drawStackTemp } = useCanvas();
+    const { canvasRef } = useCanvas();
     const canvasSettings = useCanvasSettings();
+    const { addDrawable, resetDrawStackTemp } = useDrawStackActions();
     const mouseLeftClick = useMouseLeftClick();
 
     const ctx = canvasRef.current?.getContext('2d');
@@ -31,10 +33,10 @@ export const useDrawRender = () => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;
 
         drawable.current.saveSettings(canvasSettings);
-        drawStack.current.push(drawable.current);
-        drawStackTemp.current = [];
+        addDrawable(drawable.current);
+        resetDrawStackTemp();
         drawable.current = null;
-    }, [mouseLeftClick, drawStack, drawStackTemp, canvasSettings]);
+    }, [mouseLeftClick, canvasSettings, addDrawable, resetDrawStackTemp]);
 
     const drawRender = (
         startX: number,

@@ -1,5 +1,6 @@
-import { IDrawable } from '@/classes/IDrawable';
 import { useCanvasActions } from '@/hooks/useCanvasStore';
+import { useDrawStackActions } from '@/hooks/useDrawStackStore';
+import { drawStackStore } from '@/stores/drawStackStore';
 import { CanvasSettings } from '@/types/canvas';
 import { applyCanvasSettings } from '@/utils/canvas';
 import {
@@ -12,14 +13,10 @@ import { useWindowSize } from 'usehooks-ts';
 
 type CanvasContextProps = {
     canvasRef: MutableRefObject<HTMLCanvasElement | null>;
-    drawStack: MutableRefObject<IDrawable[]>;
-    drawStackTemp: MutableRefObject<IDrawable[]>;
     initialization: () => void;
     setSettings: (settings: CanvasSettings) => void;
     reset: () => void;
     redraw: () => void;
-    undo: () => void;
-    redo: () => void;
     zoom: (scale: number) => void;
 };
 
@@ -27,10 +24,9 @@ export const CanvasContext = createContext<CanvasContextProps | null>(null);
 
 export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const drawStack = useRef<IDrawable[]>([]);
-    const drawStackTemp = useRef<IDrawable[]>([]);
 
     const { resetCanvasState } = useCanvasActions();
+    const { resetDrawStackState } = useDrawStackActions();
     const { width = 0, height = 0 } = useWindowSize();
 
     const ctx = canvasRef.current?.getContext('2d');
@@ -54,15 +50,13 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
     const reset = () => {
         if (!ctx) return;
 
-        // reset none canvas 'ui' properties
-        drawStack.current = [];
-        drawStackTemp.current = [];
+        // reset none store properties (matrix)
         ctx.setTransform(new DOMMatrix());
 
         // reset store, canvas 'ui' properties will be sync in synchronization layer
         resetCanvasState();
-
-        redraw();
+        // reset drawStacks, redraw will be called in synchronization layer
+        resetDrawStackState();
     };
 
     const redraw = () => {
@@ -90,25 +84,10 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
         );
 
         // redraw all drawables
-        drawStack.current.forEach((drawable) => {
+        const drawStack = drawStackStore.getState().drawStack;
+        drawStack.forEach((drawable) => {
             drawable.redraw(ctx);
         });
-    };
-
-    const undo = () => {
-        const temp = drawStack.current?.pop();
-
-        if (temp) drawStackTemp.current?.push(temp);
-
-        redraw();
-    };
-
-    const redo = () => {
-        const temp = drawStackTemp.current?.pop();
-
-        if (temp) drawStack.current?.push(temp);
-
-        redraw();
     };
 
     const zoom = (scale: number) => {
@@ -127,14 +106,10 @@ export const CanvasProvider = ({ children }: PropsWithChildren) => {
 
     const initialValue: CanvasContextProps = {
         canvasRef,
-        drawStack,
-        drawStackTemp,
         initialization,
         reset,
         setSettings,
         redraw,
-        undo,
-        redo,
         zoom,
     };
 
