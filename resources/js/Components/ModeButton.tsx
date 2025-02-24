@@ -4,6 +4,7 @@ import { useCanvasActions, useMode } from '@/hooks/useCanvasStore';
 import { Mode } from '@/types/mode';
 import {
     Grab,
+    MousePointer2,
     Pen,
     PenLine,
     Square,
@@ -48,6 +49,8 @@ const ModeIcon = ({ modeButton }: ModeButtonProps) => {
             return <Pen size={21} />;
         case ModeEnum.DRAGGABLE:
             return <Grab />;
+        case ModeEnum.SELECTION:
+            return <MousePointer2 />;
         default:
             return <></>;
     }

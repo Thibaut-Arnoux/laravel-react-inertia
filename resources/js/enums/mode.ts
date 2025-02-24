@@ -9,8 +9,8 @@ export const DrawModeEnum = {
 export const DrawModeList = Object.values(DrawModeEnum);
 
 export const ModeEnum = {
-    // TODO: SELECTION: 'selection',
     DRAGGABLE: 'draggable',
+    SELECTION: 'selection',
     ...DrawModeEnum,
 } as const;
 
