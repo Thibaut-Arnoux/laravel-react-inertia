@@ -3,19 +3,22 @@ import { ColorPickerButton } from '@/Components/ColorPickerButton';
 import { LineWidthSlider } from '@/Components/LineWidthSlider';
 import { ShapeModeToggle } from '@/Components/ShapeModeToggle';
 import { TransparencySlider } from '@/Components/TransparencySlider';
+import { ModeEnum } from '@/enums/mode';
 import { ShapeModeEnum } from '@/enums/shape';
 import { useCanvasActions, useMode } from '@/hooks/useCanvasStore';
+import { useDrawStack } from '@/hooks/useDrawStackStore';
 import { CanvasDefaultSettings } from '@/types/canvas';
 import { isDrawableMode } from '@/types/mode';
 import { useEffect } from 'react';
 
-export const DrawSettingsPanel = () => {
+export const ModeSettingsPanel = () => {
     const mode = useMode();
 
-    return isDrawableMode(mode) && <DrawSettingsPanelContent />;
+    if (isDrawableMode(mode)) return <DrawSettingsPanel />;
+    else if (mode === ModeEnum.SELECTION) return <DrawStackPanel />;
 };
 
-const DrawSettingsPanelContent = () => {
+const DrawSettingsPanel = () => {
     const { setShapeMode, resetDrawSettings } = useCanvasActions();
 
     useEffect(() => {
@@ -47,6 +50,21 @@ const DrawSettingsPanelContent = () => {
                     <ShapeModeToggle className="mt-4 px-4" />
                 </details>
             </li>
+        </ul>
+    );
+};
+
+const DrawStackPanel = () => {
+    const drawStack = useDrawStack();
+
+    return (
+        <ul className="menu menu-sm w-56 rounded-box bg-base-200 shadow">
+            <li className="menu-title">DrawStack</li>
+            {drawStack.map((drawable, index) => (
+                <li key={index}>
+                    <a>Test</a>
+                </li>
+            ))}
         </ul>
     );
 };

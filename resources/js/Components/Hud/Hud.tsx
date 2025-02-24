@@ -3,8 +3,8 @@ import { ActionPanel } from '@/Components/Hud/ActionPanel';
 import { BottomLeft } from '@/Components/Hud/BottomLeft';
 import { BottomMiddle } from '@/Components/Hud/BottomMiddle';
 import { BottomRight } from '@/Components/Hud/BottomRight';
-import { DrawSettingsPanel } from '@/Components/Hud/DrawSettingsPanel';
 import { ModePanel } from '@/Components/Hud/ModePanel';
+import { ModeSettingsPanel } from '@/Components/Hud/ModeSettingsPanel';
 import { TopLeft } from '@/Components/Hud/TopLeft';
 import { TopMiddle } from '@/Components/Hud/TopMiddle';
 import { TopRight } from '@/Components/Hud/TopRight';
@@ -23,7 +23,7 @@ export const Hud = () => {
                 <ModePanel />
             </TopMiddle>
             <TopRight>
-                <DrawSettingsPanel />
+                <ModeSettingsPanel />
             </TopRight>
 
             <BottomLeft>
