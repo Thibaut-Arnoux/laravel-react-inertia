@@ -28,7 +28,7 @@ export const ModeButton = ({ modeButton }: ModeButtonProps) => {
 
     return (
         <IconButton
-            className={`${isActive && 'text-primary'}`}
+            className={`btn-sm ${isActive && 'text-primary'}`}
             icon={<ModeIcon modeButton={modeButton} />}
             onClick={handleClick}
         />

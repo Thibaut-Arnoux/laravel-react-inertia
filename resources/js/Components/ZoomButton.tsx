@@ -1,3 +1,4 @@
+import { IconButton } from '@/Components/IconButton';
 import { useCanvasActions } from '@/hooks/useCanvasStore';
 import { Minus, Plus } from 'lucide-react';
 
@@ -17,12 +18,11 @@ export const ZoomButton = ({ zoomIn }: ZoomButtonProps) => {
     };
 
     return (
-        <button
-            className={`btn btn-square btn-ghost btn-sm`}
+        <IconButton
+            className="btn-sm"
+            icon={<ZoomIcon zoomIn={zoomIn} />}
             onClick={handleClick}
-        >
-            <ZoomIcon zoomIn={zoomIn} />
-        </button>
+        />
     );
 };
 
