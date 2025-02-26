@@ -4,18 +4,11 @@ import { LineWidthSlider } from '@/Components/LineWidthSlider';
 import { ShapeModeToggle } from '@/Components/ShapeModeToggle';
 import { TransparencySlider } from '@/Components/TransparencySlider';
 import { ShapeModeEnum } from '@/enums/shape';
-import { useCanvasActions, useMode } from '@/hooks/useCanvasStore';
+import { useCanvasActions } from '@/hooks/useCanvasStore';
 import { CanvasDefaultSettings } from '@/types/canvas';
-import { isDrawableMode } from '@/types/mode';
 import { useEffect } from 'react';
 
 export const DrawSettingsPanel = () => {
-    const mode = useMode();
-
-    return isDrawableMode(mode) && <DrawSettingsPanelContent />;
-};
-
-const DrawSettingsPanelContent = () => {
     const { setShapeMode, resetDrawSettings } = useCanvasActions();
 
     useEffect(() => {
