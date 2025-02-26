@@ -20,7 +20,7 @@ export const DrawStackPanel = () => {
                             icon={<Trash2 size={16} />}
                         />
                     </div>
-                    <hr />
+                    <div className="divider m-0 h-1"></div>
                     {drawStack.map((drawable, index) => (
                         <DrawStackItem key={index} drawable={drawable} />
                     ))}
