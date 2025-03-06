@@ -9,4 +9,5 @@ export const ModeSettingsPanel = () => {
 
     if (isDrawableMode(mode)) return <DrawSettingsPanel />;
     else if (mode === ModeEnum.SELECTION) return <DrawStackPanel />;
+    else return <></>;
 };

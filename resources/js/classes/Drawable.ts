@@ -11,6 +11,10 @@ export abstract class Drawable implements IDrawable {
         applyCanvasSettings(ctx, this.settings);
     };
 
+    public name(): string {
+        return this.constructor.name;
+    }
+
     public exportSettings() {
         return this.settings ?? null;
     }

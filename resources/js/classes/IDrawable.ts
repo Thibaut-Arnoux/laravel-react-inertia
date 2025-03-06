@@ -1,6 +1,8 @@
 import { CanvasSettings } from '@/types/canvas';
 
 export interface IDrawable {
+    name(): string;
+
     draw(ctx: CanvasRenderingContext2D): void;
 
     redraw(ctx: CanvasRenderingContext2D): void;
