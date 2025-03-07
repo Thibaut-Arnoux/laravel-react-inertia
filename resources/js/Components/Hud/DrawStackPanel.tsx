@@ -43,7 +43,7 @@ const DrawStackItem = ({ drawable }: { drawable: IDrawable }) => {
                 <a>
                     <Checkbox />
                     <span className="overflow-hidden text-ellipsis whitespace-nowrap">
-                        {drawable.constructor.name}
+                        {drawStackItem.name}
                     </span>
                     {isHovered && (
                         <div className="flex flex-row gap-1">

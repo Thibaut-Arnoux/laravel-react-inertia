@@ -1,7 +1,7 @@
 import { CanvasSettings } from '@/types/canvas';
 
 export interface IDrawable {
-    name(): string;
+    name: string;
 
     draw(ctx: CanvasRenderingContext2D): void;
 

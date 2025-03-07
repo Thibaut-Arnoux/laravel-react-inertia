@@ -5,15 +5,13 @@ import { applyCanvasSettings } from '@/utils/canvas';
 export abstract class Drawable implements IDrawable {
     protected settings?: CanvasSettings;
 
+    public name: string = this.constructor.name;
+
     private _applyCanvasSettings = (ctx: CanvasRenderingContext2D) => {
         if (this.settings === undefined) return;
 
         applyCanvasSettings(ctx, this.settings);
     };
-
-    public name(): string {
-        return this.constructor.name;
-    }
 
     public exportSettings() {
         return this.settings ?? null;
