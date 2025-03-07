@@ -1,10 +1,16 @@
 import { HamburgerMenu } from '@/Components/HamburgerMenu';
 import { IconButton } from '@/Components/IconButton';
 import { useCanvas } from '@/hooks/useCanvas';
-import { useDrawStackActions } from '@/hooks/useDrawStackStore';
+import {
+    useDrawStack,
+    useDrawStackActions,
+    useDrawStackTemp,
+} from '@/hooks/useDrawStackStore';
 import { Redo, RotateCcw, Undo } from 'lucide-react';
 
 export const ActionPanel = () => {
+    const drawStack = useDrawStack();
+    const drawStackTemp = useDrawStackTemp();
     const { reset } = useCanvas();
     const { undo, redo } = useDrawStackActions();
 
@@ -19,8 +25,18 @@ export const ActionPanel = () => {
                     </a>
                 </HamburgerMenu.Item>
             </HamburgerMenu>
-            <IconButton className="btn-sm" icon={<Undo />} onClick={undo} />
-            <IconButton className="btn-sm" icon={<Redo />} onClick={redo} />
+            <IconButton
+                className="btn-sm"
+                icon={<Undo />}
+                onClick={undo}
+                disabled={drawStack.length === 0}
+            />
+            <IconButton
+                className="btn-sm"
+                icon={<Redo />}
+                onClick={redo}
+                disabled={drawStackTemp.length === 0}
+            />
             <IconButton
                 className="btn-sm"
                 icon={<RotateCcw />}
