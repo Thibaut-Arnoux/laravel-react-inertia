@@ -1,12 +1,21 @@
-import { IDrawable } from '@/classes/IDrawable';
 import Checkbox from '@/Components/Checkbox';
 import { IconButton } from '@/Components/IconButton';
-import { useDrawStack } from '@/hooks/useDrawStackStore';
+import { useDrawStack, useDrawStackActions } from '@/hooks/useDrawStackStore';
+import { IDrawStackItem } from '@/types/canvas';
 import { ArrowDownToLine, ArrowUpToLine, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
 export const DrawStackPanel = () => {
     const drawStack = useDrawStack();
+    const { setSelectedDrawStackItems, removeDrawStackItems } =
+        useDrawStackActions();
+
+    const isGlobalChecked = drawStack.every(
+        (drawStackItem) => drawStackItem.selected,
+    );
+    const isTrashDisabled = drawStack.every(
+        (drawStackItem) => !drawStackItem.selected,
+    );
 
     return (
         <ul className="menu menu-sm w-56 gap-1 rounded-box bg-base-200 shadow">
@@ -14,15 +23,25 @@ export const DrawStackPanel = () => {
             {drawStack.length > 0 && (
                 <>
                     <div className="flex flex-row items-center justify-between px-3">
-                        <Checkbox />
+                        <Checkbox
+                            checked={isGlobalChecked}
+                            onChange={() =>
+                                setSelectedDrawStackItems(!isGlobalChecked)
+                            }
+                        />
                         <IconButton
                             className="btn-xs"
                             icon={<Trash2 size={16} />}
+                            onClick={removeDrawStackItems}
+                            disabled={isTrashDisabled}
                         />
                     </div>
                     <div className="divider m-0 h-1"></div>
-                    {drawStack.map((drawable, index) => (
-                        <DrawStackItem key={index} drawable={drawable} />
+                    {drawStack.map((drawStackItem) => (
+                        <DrawStackItem
+                            key={drawStackItem.id}
+                            drawStackItem={drawStackItem}
+                        />
                     ))}
                 </>
             )}
@@ -30,8 +49,19 @@ export const DrawStackPanel = () => {
     );
 };
 
-const DrawStackItem = ({ drawable }: { drawable: IDrawable }) => {
+const DrawStackItem = ({
+    drawStackItem,
+}: {
+    drawStackItem: IDrawStackItem;
+}) => {
     const [isHovered, setIsHovered] = useState(false);
+
+    const {
+        toggleDrawStackItem,
+        removeDrawStackItem,
+        upDrawStackItem,
+        downDrawStackItem,
+    } = useDrawStackActions();
 
     return (
         <div
@@ -41,7 +71,12 @@ const DrawStackItem = ({ drawable }: { drawable: IDrawable }) => {
         >
             <li className="w-full">
                 <a>
-                    <Checkbox />
+                    <Checkbox
+                        checked={drawStackItem.selected}
+                        onChange={() => {
+                            toggleDrawStackItem(drawStackItem.id);
+                        }}
+                    />
                     <span className="overflow-hidden text-ellipsis whitespace-nowrap">
                         {drawStackItem.name}
                     </span>
@@ -50,14 +85,23 @@ const DrawStackItem = ({ drawable }: { drawable: IDrawable }) => {
                             <IconButton
                                 className="btn-xs"
                                 icon={<ArrowUpToLine size={16} />}
+                                onClick={() =>
+                                    upDrawStackItem(drawStackItem.id)
+                                }
                             />
                             <IconButton
                                 className="btn-xs"
                                 icon={<ArrowDownToLine size={16} />}
+                                onClick={() =>
+                                    downDrawStackItem(drawStackItem.id)
+                                }
                             />
                             <IconButton
                                 className="btn-xs"
                                 icon={<Trash2 size={16} />}
+                                onClick={() =>
+                                    removeDrawStackItem(drawStackItem.id)
+                                }
                             />
                         </div>
                     )}
