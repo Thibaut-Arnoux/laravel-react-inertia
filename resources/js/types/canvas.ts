@@ -1,3 +1,4 @@
+import { IDrawable } from '@/classes/IDrawable';
 import { ShapeModeEnum } from '@/enums/shape';
 
 export const CanvasDefaultSettings = {
@@ -22,3 +23,8 @@ export type CanvasSettings = {
 };
 
 export type ShapeMode = (typeof ShapeModeEnum)[keyof typeof ShapeModeEnum];
+
+export interface IDrawStackItem extends IDrawable {
+    id: string;
+    selected: boolean;
+}

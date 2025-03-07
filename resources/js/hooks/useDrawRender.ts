@@ -24,7 +24,7 @@ export const useDrawRender = () => {
     const shapeMode = useShapeMode();
     const { canvasRef } = useCanvas();
     const canvasSettings = useCanvasSettings();
-    const { addDrawable, resetDrawStackTemp } = useDrawStackActions();
+    const { addDrawStackItem, resetDrawStackTemp } = useDrawStackActions();
     const mouseLeftClick = useMouseLeftClick();
 
     const ctx = canvasRef.current?.getContext('2d');
@@ -33,10 +33,15 @@ export const useDrawRender = () => {
         if (mouseLeftClick || !drawable.current?.isValid()) return;
 
         drawable.current.saveSettings(canvasSettings);
-        addDrawable(drawable.current);
+        addDrawStackItem(
+            Object.assign(drawable.current, {
+                id: crypto.randomUUID(),
+                selected: false,
+            }),
+        );
         resetDrawStackTemp();
         drawable.current = null;
-    }, [mouseLeftClick, canvasSettings, addDrawable, resetDrawStackTemp]);
+    }, [mouseLeftClick, canvasSettings, addDrawStackItem, resetDrawStackTemp]);
 
     const drawRender = (
         startX: number,
